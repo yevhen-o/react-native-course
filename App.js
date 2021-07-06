@@ -3,12 +3,12 @@ import { StyleSheet, View, Text } from 'react-native';
 import AppLoading from 'expo-app-loading';
 import * as Font from 'expo-font';
 
-import MainNavigator from './navigation/MainNavigator';
+import MainNavigator from 'navigation/MainNavigator';
 
 const fetchFonts = () => {
   return Font.loadAsync({
-    'open-sans': require('./assets/Fonts/OpenSans-Regular.ttf'),
-    'open-sans-bold': require('./assets/Fonts/OpenSans-Bold.ttf'),
+    'open-sans': require('assets/Fonts/OpenSans-Regular.ttf'),
+    'open-sans-bold': require('assets/Fonts/OpenSans-Bold.ttf'),
   })
 }
 
@@ -25,6 +25,7 @@ export default function App() {
       />
     )
   }
+  console.info("Ready id:", Math.random().toString().replace('0.', '')); 
   return (
     <MainNavigator />
   );

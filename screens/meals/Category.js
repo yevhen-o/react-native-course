@@ -1,10 +1,11 @@
-import React, { useLayoutEffect } from 'react';
-import { View, Text, StyleSheet, Button } from 'react-native';
-import { COLORS } from '../../common/constants';
+import React, { useLayoutEffect, useState } from 'react';
 
-import { SCREENS } from '../../navigation/MainNavigator';
+import { MEALS } from 'data/dummyData';
+import PlatesList from 'components/PlatesList';
 
-const Category = ({navigation, route,...props}) => {
+const Category = ({navigation, route, ...props}) => {
+
+  const [categoryMeal, setCategoryMeal] = useState([])
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -17,29 +18,12 @@ const Category = ({navigation, route,...props}) => {
         fontWeight: 'bold',
       },
     });
+    setCategoryMeal(MEALS.filter(meal => meal.categoryIds.includes(route.params.item.id)))
   }, [navigation, route]);
 
   return (
-  <View style={styles.container}>
-    <Text>Meals category</Text>
-    <Button onPress={() => navigation.navigate(SCREENS.MealDetail)} title="Go to Meal Detail" />
-  </View>
+    <PlatesList data={categoryMeal} color={route.params.item.color} navigation={navigation} />
   )
 }
-
-/* Category.navigationOptions = {
-  headerTitle: 'Some shit',
-  headerStyle: {
-    backgroundColor: COLORS.primaryColor,
-  }
-} */
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  }
-})
 
 export default Category;

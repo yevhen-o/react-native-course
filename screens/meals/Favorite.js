@@ -1,14 +1,28 @@
-import React from 'react';
-import { View, Text, StyleSheet, Button } from 'react-native';
+import React, { useLayoutEffect } from 'react';
+import { StyleSheet } from 'react-native';
 
-import { SCREENS } from '../../navigation/MainNavigator';
+import { MEALS } from 'data/dummyData';
+import { COLORS } from 'common/constants';
 
-const Favorites = props => {
+import PlatesList from 'components/PlatesList';
+
+const Favorites = ({ navigation, route }) => {
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerStyle: {
+        backgroundColor: COLORS.accentColor,
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+      },
+    });
+  }, [navigation, route]);
+
+  const favorites = MEALS.filter(m => ['c1', 'c2'].some(c => m.categoryIds.includes(c)))
   return (
-  <View style={styles.container}>
-    <Text>Meals Favorites</Text>
-    <Button onPress={() => props.navigation.navigate(SCREENS.Meals)} title="Go to Meals" />
-  </View>
+    <PlatesList data={favorites} color={COLORS.accentColor} navigation={navigation} />
   )
 }
 

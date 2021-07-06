@@ -1,24 +1,96 @@
-import React from 'react';
-import { View, Text, StyleSheet, Button } from 'react-native';
+import React, { useLayoutEffect } from 'react';
+import { View, StyleSheet, ScrollView, Image } from 'react-native';
 
-import { SCREENS } from '../../navigation/MainNavigator';
+import { COLORS } from 'common/constants';
 
-const MealDetail = props => {
+import BodyText from 'components/BodyText';
+import ErrorText from 'components/ErrorText';
+
+const MealDetail = ({navigation, route, ...props}) => {
+
+  const item = route.params.item;
+
+  if(!item){
+    return <ErrorText>Please select some Meal2</ErrorText>
+  }
+
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      title: route.params.item.title + '!!!',
+      headerStyle: {
+        backgroundColor: route.params.item.color,
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+      },
+    });
+  }, [navigation, route]);
+  
+  const renderList = (list, title) => (
+    <View style={styles.list}>
+      <BodyText style={styles.title}>{title}</BodyText>
+      {list.map(item => <BodyText style={styles.listItem}>{item}</BodyText>)}
+    </View>
+  )
+  
+  const renderSteps = (list, title) => (
+    <View style={styles.list}>
+      <BodyText style={styles.title}>{title}</BodyText>
+      {list.map((item, index) => (
+        <View style={styles.listItem}>
+          <BodyText style={{marginRight: 8, fontWeight: 'bold'}}>{index + 1}</BodyText>
+          <BodyText>{item}</BodyText>
+        </View>
+      ))}
+
+    </View>
+  )
+
+  const { imageUrl, affordability, complexity, duration, ingredients, steps } = item;
   
   return (
-  <View style={styles.container}>
-    <Text>Meal detail screen</Text>
-    <Button onPress={() => props.navigation.navigate(SCREENS.Favorite)} title="Go to Favorite" />
-    <Button onPress={() => props.navigation.navigate(SCREENS.Filters)} title="Go to Filters" />
-  </View>
+  <ScrollView>
+    <Image style={styles.image} source={{uri: imageUrl}} />
+    <View style={styles.wrapper}>
+      <View style={styles.info}>
+        <BodyText><BodyText style={{fontWeight: 'bold'}}>Affordability:</BodyText> {affordability}</BodyText>
+        <BodyText><BodyText style={{fontWeight: 'bold'}}>Complexity:</BodyText> {complexity}</BodyText>
+        <BodyText><BodyText style={{fontWeight: 'bold'}}>Duration:</BodyText> {duration}</BodyText>
+      </View>
+      {renderList(ingredients, 'Ingredients')}
+      {renderSteps(steps, 'Receipt')}
+    </View>
+  </ScrollView>
   )
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+  wrapper: {
+    paddingHorizontal: 14,
+  },
+  image: {
+    width: '100%',
+    height: 300,
+  },
+  info: {
+    marginVertical: 10,
+  },
+  title: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    borderBottomWidth: 2,
+    borderColor: COLORS.accentColor,
+    marginBottom: 8,
+    paddingBottom: 4,
+  },
+  list: {
+    marginBottom: 14,
+  },
+  listItem: {
+    flexDirection: 'row',
+    marginBottom: 8,
   }
 })
 

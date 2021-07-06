@@ -1,22 +1,55 @@
 import React from 'react';
-import { View, Text, StyleSheet, Button } from 'react-native';
+import { View, StyleSheet, ScrollView, Switch } from 'react-native';
+import { useState } from 'react/cjs/react.development';
 
-import { SCREENS } from '../../navigation/MainNavigator';
+import BodyText from 'components/BodyText';
 
 const Filters = props => {
+
+  const [filterValues, setFilterValues] = useState({
+    isGlutenFree: false,
+    isLactoseFree: false,
+    isVegetarian: false,
+    isVegan: false,
+  });
+
+  const filters = [
+    { label: 'Is GlutenFree', key: 'isGlutenFree'},
+    { label: 'Is LactoseFree', key: 'isLactoseFree'},
+    { label: 'Is Vegetarian', key: 'isVegetarian'},
+    { label: 'Is Vegan', key: 'isVegan'},
+  ];
+
+  const handleFilterChange = key => newValue => {
+    setFilterValues(prevValues => ({
+      ...prevValues,
+      [key]: newValue,
+    }))
+  }
+
   return (
-  <View style={styles.container}>
-    <Text>Meals Filters</Text>
-    <Button onPress={() => props.navigation.navigate(SCREENS.Meals)} title="Go to Meals" />
-  </View>
+  <ScrollView >
+    {filters.map( row => (
+      <View style={styles.row} key={row.key}>
+        <BodyText style={styles.label}>{row.label}</BodyText>
+        <Switch value={filterValues[row.key]} onValueChange={handleFilterChange(row.key)} />
+      </View>
+    ))}
+  </ScrollView>
   )
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
+  row: {
+    justifyContent: 'space-between',
+    flex: 1, 
+    padding: 10, 
+    flexDirection: 'row',
     alignItems: 'center',
+    paddingLeft: 20,
+  },
+  label: {
+    fontWeight: 'bold',
   }
 })
 

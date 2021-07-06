@@ -2,13 +2,13 @@ import React from 'react';
 import { StyleSheet, Text, View, Button, TouchableOpacity, ScrollView } from 'react-native';
 
 
-const BodyText = props => (
-  <Text style={{...styles.bodyText, ...props.style}}>{props.children}</Text>
+const BodyText = ({style, children, ...restProps}) => (
+  <Text style={{...styles.bodyText, ...style}} { ...restProps }>{children}</Text>
 )
 
 const styles = StyleSheet.create({
   bodyText: {
-    fontFamily: 'open-sans-bold',
+    fontFamily: 'open-sans',
     fontSize: 16,
   }
 })

@@ -1,11 +1,9 @@
 import React from 'react';
-import { View, Text, StyleSheet, Button, FlatList, TouchableOpacity } from 'react-native';
+import { StyleSheet, FlatList } from 'react-native';
 
-import { SCREENS } from '../../navigation/MainNavigator';
-import { CATEGORIES } from '../../data/dummyData';
-import { COLORS } from '../../common/constants';
-
-import BodyText from '../../components/BodyText';
+import { CATEGORIES } from 'data/dummyData';
+import { SCREENS } from 'navigation/MainNavigator';
+import CategoryPlate from 'components/CategoryPlate';
 
 const Categories = props => {
 
@@ -19,35 +17,17 @@ const Categories = props => {
   }
 
   const renderItem = data => (
-    <TouchableOpacity style={styles.category} onPress={categoryChangeHandler.bind(null, data.item)}>
-      <View >
-        <BodyText>{data.item.title}</BodyText>
-      </View>
-    </TouchableOpacity>
+    <CategoryPlate onSelect={categoryChangeHandler.bind(null, data.item)} item={data.item} />
   )
   return (
     <FlatList numColumns={2} data={CATEGORIES} renderItem={renderItem} />
   )
 }
 
-/* Categories.navigationOptions = {
-  title: 'Some shit',
-  headerStyle: {
-    backgroundColor: COLORS.primaryColor,
-  }
-} */
-
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    
   },
-  category: {
-    flex: 1,
-    height: 150, 
-    margin: 10,
-  }
 })
 
 export default Categories;
