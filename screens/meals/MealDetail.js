@@ -1,10 +1,12 @@
 import React, { useLayoutEffect } from 'react';
-import { View, StyleSheet, ScrollView, Image } from 'react-native';
+import { View, StyleSheet, ScrollView, Image, Button, TouchableOpacity } from 'react-native';
 
 import { COLORS } from 'common/constants';
 
+import IonIcons from 'components/IonIcons';
 import BodyText from 'components/BodyText';
 import ErrorText from 'components/ErrorText';
+import { useState } from 'react/cjs/react.development';
 
 const MealDetail = ({navigation, route, ...props}) => {
 
@@ -14,6 +16,7 @@ const MealDetail = ({navigation, route, ...props}) => {
     return <ErrorText>Please select some Meal2</ErrorText>
   }
 
+  const [isFavorited, setIsFavorited] = useState(false)
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -25,8 +28,20 @@ const MealDetail = ({navigation, route, ...props}) => {
       headerTitleStyle: {
         fontWeight: 'bold',
       },
+      headerRight: (params) => {
+        return (
+          <TouchableOpacity
+          onPress={() => {
+            alert('Will add to favorite soon');
+            setIsFavorited(!isFavorited);
+          }}
+        >
+          <IonIcons style={{ marginRight: 10 }} color={params.tintColor} name={isFavorited ? 'star' : 'star-outline'} />
+        </TouchableOpacity>
+        )
+      },
     });
-  }, [navigation, route]);
+  }, [navigation, route, isFavorited]);
   
   const renderList = (list, title) => (
     <View style={styles.list}>

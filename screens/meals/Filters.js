@@ -1,10 +1,11 @@
-import React from 'react';
-import { View, StyleSheet, ScrollView, Switch } from 'react-native';
+import React, { useLayoutEffect } from 'react';
+import { View, StyleSheet, ScrollView, Switch, TouchableOpacity } from 'react-native';
 import { useState } from 'react/cjs/react.development';
 
 import BodyText from 'components/BodyText';
+import IonIcons from 'components/IonIcons';
 
-const Filters = props => {
+const Filters = ({ navigation, route }) => {
 
   const [filterValues, setFilterValues] = useState({
     isGlutenFree: false,
@@ -12,6 +13,27 @@ const Filters = props => {
     isVegetarian: false,
     isVegan: false,
   });
+
+  const saveButtonHandler = values => {
+    console.log(values);
+  }
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: (params) => {
+        return (
+          <TouchableOpacity
+            onPress={() => {
+              alert('Will apply save setting someday!');
+              saveButtonHandler(filterValues);
+            }}
+          >
+            <IonIcons style={{ marginRight: 10 }} name={'save'} />
+          </TouchableOpacity>
+        )
+      },
+    });
+  }, [navigation, route, filterValues]);
 
   const filters = [
     { label: 'Is GlutenFree', key: 'isGlutenFree'},
