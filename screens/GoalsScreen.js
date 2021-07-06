@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, Button, TouchableOpacity, ScrollView } from 'react-native';
 
-import Head from '../components/Head';
-import TextInput from '../components/TextInput';
+import Head from 'components/Head';
+import TextInput from 'components/TextInput';
+
+import PText from 'components/PText';
 
 const GoalsScreen = () => {
 
@@ -48,6 +50,13 @@ const GoalsScreen = () => {
       <Text>Not bad, at all...</Text>
 
       <Button title='Change text' onPress={() => setText('The button works correct!!!')} />
+
+      <PText>Normal regular app text</PText>
+      <PText isBold>Bold regular app text</PText>
+      <PText isH1>H1 app text</PText>
+      <PText isH2>H2 app text</PText>
+      <PText isH3>H3 app text</PText>
+      <PText isH4>H4 app text</PText>
     </View>
   );
 }

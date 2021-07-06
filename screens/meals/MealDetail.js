@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
     fontSize: 22,
     fontWeight: 'bold',
     borderBottomWidth: 2,
-    borderColor: COLORS.accentColor,
+    borderColor: COLORS.accent,
     marginBottom: 8,
     paddingBottom: 4,
   },

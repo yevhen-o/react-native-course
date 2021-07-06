@@ -11,7 +11,7 @@ const Favorites = ({ navigation, route }) => {
   useLayoutEffect(() => {
     navigation.setOptions({
       headerStyle: {
-        backgroundColor: COLORS.accentColor,
+        backgroundColor: COLORS.accent,
       },
       headerTintColor: '#fff',
       headerTitleStyle: {
@@ -22,7 +22,7 @@ const Favorites = ({ navigation, route }) => {
 
   const favorites = MEALS.filter(m => ['c1', 'c2'].some(c => m.categoryIds.includes(c)))
   return (
-    <PlatesList data={favorites} color={COLORS.accentColor} navigation={navigation} />
+    <PlatesList data={favorites} color={COLORS.accent} navigation={navigation} />
   )
 }
 

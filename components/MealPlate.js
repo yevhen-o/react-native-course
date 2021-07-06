@@ -3,11 +3,12 @@ import { TouchableOpacity, StyleSheet, ImageBackground, View } from 'react-nativ
 
 import Card from 'components/Card';
 import BodyText from 'components/BodyText';
+import { COLORS } from 'common/constants';
 
 
 const MealPlate = ({item: { title, imageUrl, affordability, duration, complexity}, item, onSelect}) => {
   return (
-    <Card style={{...styles.category, backgroundColor: 'white'}}>
+    <Card style={{...styles.category, backgroundColor: COLORS.light }}>
       <TouchableOpacity style={styles.link} onPress={onSelect}>
         <ImageBackground style={styles.image} source={{uri: item.imageUrl}}>
           <BodyText numberOfLines={3} style={styles.title}>{item.title}</BodyText>
@@ -38,9 +39,9 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 22,
-    color: 'white',
+    color: COLORS.light,
     textAlign: 'center',
-    textShadowColor: 'black',
+    textShadowColor: COLORS.primary,
     textShadowRadius: 5,
     padding: 14,
     fontWeight: 'bold',

@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, TouchableOpacity, ScrollView } from 'react-native';
+import { StyleSheet, Text } from 'react-native';
 
 
 const BodyText = ({style, children, ...restProps}) => (
