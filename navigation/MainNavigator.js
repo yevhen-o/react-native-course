@@ -83,8 +83,8 @@ const MealsAppFilterStack = [
     },
   },
   {name: SCREENS.Category, component: Category, options: {title: 'The Meals Category'}},
-  {name: SCREENS.Categories, component: Categories, options: {title: 'The Meals Categories'}},
   {name: SCREENS.MealDetail, component: MealDetail, options: {title: 'The Meal Detail'}},
+  {name: SCREENS.Categories, component: Categories, options: {title: 'The Meals Categories'}},
 ];
 
 const MealsAppStackNavigator = () => (

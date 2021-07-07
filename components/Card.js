@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
   content: {
     flex: 1,
     flexGrow: 1, 
-    flexDirection: 'row',
+    flexDirection: 'row'
   },
 });
 
