@@ -1,14 +1,20 @@
-import React, {useLayoutEffect} from 'react';
-import {View, StyleSheet, ScrollView, Image, TouchableOpacity} from 'react-native';
+import React, { useLayoutEffect } from 'react';
+import {
+  View,
+  StyleSheet,
+  ScrollView,
+  Image,
+  TouchableOpacity,
+} from 'react-native';
 
-import {COLORS} from 'common/constants';
+import { COLORS } from 'common/constants';
 
 import IonIcons from 'components/IonIcons';
 import BodyText from 'components/BodyText';
 import ErrorText from 'components/ErrorText';
-import {useState} from 'react/cjs/react.development';
+import { useState } from 'react/cjs/react.development';
 
-const MealDetail = ({navigation, route}) => {
+const MealDetail = ({ navigation, route }) => {
   const item = route.params.item;
 
   if (!item) {
@@ -35,7 +41,7 @@ const MealDetail = ({navigation, route}) => {
               setIsFavorite(!isFavorite);
             }}>
             <IonIcons
-              style={{marginRight: 10}}
+              style={{ marginRight: 10 }}
               color={params.tintColor}
               name={isFavorite ? 'star' : 'star-outline'}
             />
@@ -61,28 +67,34 @@ const MealDetail = ({navigation, route}) => {
       <BodyText style={styles.title}>{title}</BodyText>
       {list.map((item, index) => (
         <View key={index} style={styles.listItem}>
-          <BodyText style={{marginRight: 8, fontWeight: 'bold'}}>{index + 1}</BodyText>
+          <BodyText style={{ marginRight: 8, fontWeight: 'bold' }}>
+            {index + 1}
+          </BodyText>
           <BodyText>{item}</BodyText>
         </View>
       ))}
     </View>
   );
 
-  const {imageUrl, affordability, complexity, duration, ingredients, steps} = item;
+  const { imageUrl, affordability, complexity, duration, ingredients, steps } =
+    item;
 
   return (
     <ScrollView>
-      <Image style={styles.image} source={{uri: imageUrl}} />
+      <Image style={styles.image} source={{ uri: imageUrl }} />
       <View style={styles.wrapper}>
         <View style={styles.info}>
           <BodyText>
-            <BodyText style={{fontWeight: 'bold'}}>Affordability:</BodyText> {affordability}
+            <BodyText style={{ fontWeight: 'bold' }}>Affordability:</BodyText>{' '}
+            {affordability}
           </BodyText>
           <BodyText>
-            <BodyText style={{fontWeight: 'bold'}}>Complexity:</BodyText> {complexity}
+            <BodyText style={{ fontWeight: 'bold' }}>Complexity:</BodyText>{' '}
+            {complexity}
           </BodyText>
           <BodyText>
-            <BodyText style={{fontWeight: 'bold'}}>Duration:</BodyText> {duration}
+            <BodyText style={{ fontWeight: 'bold' }}>Duration:</BodyText>{' '}
+            {duration}
           </BodyText>
         </View>
         {renderList(ingredients, 'Ingredients')}

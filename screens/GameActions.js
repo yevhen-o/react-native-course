@@ -1,5 +1,5 @@
-import React, {useState, useEffect} from 'react';
-import {StyleSheet, View, Button, Alert} from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, View, Button, Alert } from 'react-native';
 
 import BodyText from '../components/BodyText';
 
@@ -19,19 +19,21 @@ const GameActions = (props) => {
       (isGrater && +tryes[0] > +props.suggestedNumber) ||
       (!isGrater && +tryes[0] < +props.suggestedNumber)
     ) {
-      Alert.alert('Комп не намахаєш', `Загадане число ---> ${props.suggestedNumber}`, [
-        {text: 'Зрозуміло більше не буду'},
-      ]);
+      Alert.alert(
+        'Комп не намахаєш',
+        `Загадане число ---> ${props.suggestedNumber}`,
+        [{ text: 'Зрозуміло більше не буду' }],
+      );
       return console.log('wrong suggestion');
     }
 
     let num;
 
     if (isGrater) {
-      setLimits((limits) => ({...limits, min: tryes[0]}));
+      setLimits((limits) => ({ ...limits, min: tryes[0] }));
       num = getNumber(tryes[0], limits.max);
     } else {
-      setLimits((limits) => ({...limits, max: tryes[0]}));
+      setLimits((limits) => ({ ...limits, max: tryes[0] }));
       num = getNumber(limits.min, tryes[0]);
     }
 
@@ -41,7 +43,7 @@ const GameActions = (props) => {
     setTryes((tryes) => [num, ...tryes]);
   };
 
-  const [limits, setLimits] = useState({min: 0, max: 100});
+  const [limits, setLimits] = useState({ min: 0, max: 100 });
 
   useEffect(() => {
     setTryes([getNumber(0, 100, props.suggestedNumber)]);

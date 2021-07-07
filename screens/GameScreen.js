@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {StyleSheet, View} from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, View } from 'react-native';
 
 import GameSelectNumber from './GameSelectNumber';
 import GameActions from './GameActions';
@@ -15,7 +15,7 @@ const GameScreen = () => {
   };
 
   const handleFinishGame = (num, iterations) => {
-    setLastGame({isFinished: true, num, iterations});
+    setLastGame({ isFinished: true, num, iterations });
   };
 
   return (
@@ -31,7 +31,10 @@ const GameScreen = () => {
         <GameSelectNumber handleStartGame={handleStartGame} />
       )}
       {!!suggestedNumber && !lastGame.isFinished && (
-        <GameActions suggestedNumber={suggestedNumber} handleFinishGame={handleFinishGame} />
+        <GameActions
+          suggestedNumber={suggestedNumber}
+          handleFinishGame={handleFinishGame}
+        />
       )}
     </View>
   );

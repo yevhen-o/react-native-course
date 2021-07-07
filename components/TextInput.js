@@ -1,6 +1,6 @@
-import {COLORS} from 'common/constants';
-import React, {useState} from 'react';
-import {StyleSheet, View, TextInput} from 'react-native';
+import { COLORS } from 'common/constants';
+import React, { useState } from 'react';
+import { StyleSheet, View, TextInput } from 'react-native';
 
 import FieldLabel from './FieldLabel';
 
@@ -22,7 +22,9 @@ const InputField = (props) => {
 
   return (
     <View style={styles.container}>
-      <FieldLabel isFloating isFloated={isFocused || !!inputValue || !!props.placeholder}>
+      <FieldLabel
+        isFloating
+        isFloated={isFocused || !!inputValue || !!props.placeholder}>
         {props.label}
       </FieldLabel>
       <TextInput

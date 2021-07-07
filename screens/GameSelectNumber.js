@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {StyleSheet, View, Button} from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, View, Button } from 'react-native';
 
 import BodyText from '../components/BodyText';
 import TextInput from '../components/TextInput';
@@ -16,11 +16,12 @@ const GameScreen = (props) => {
 
   return (
     <View style={styles.container}>
-      <BodyText style={{fontSize: 22, paddingHorizontal: 40, textAlign: 'center'}}>
+      <BodyText
+        style={{ fontSize: 22, paddingHorizontal: 40, textAlign: 'center' }}>
         Дай компу шанс вгадати число!!!
       </BodyText>
       <BodyText>Загадай число від 1 до 99</BodyText>
-      <View style={{width: 300}}>
+      <View style={{ width: 300 }}>
         <TextInput
           label={'Число'}
           onChange={handleChange}
@@ -29,7 +30,10 @@ const GameScreen = (props) => {
         />
       </View>
       <View>
-        <Button title="Готово!" onPress={props.handleStartGame.bind(null, number)} />
+        <Button
+          title="Готово!"
+          onPress={props.handleStartGame.bind(null, number)}
+        />
       </View>
     </View>
   );

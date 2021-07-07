@@ -1,5 +1,6 @@
+import { COLORS } from 'common/constants';
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 
 const Head = () => {
   return (
@@ -12,7 +13,7 @@ const Head = () => {
 const styles = StyleSheet.create({
   head: {
     alignItems: 'center',
-    backgroundColor: 'rgba(86, 252, 3, 0.5)',
+    backgroundColor: COLORS.accent,
     justifyContent: 'center',
     marginBottom: 8,
     marginLeft: -8,

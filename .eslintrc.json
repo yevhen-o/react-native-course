@@ -9,7 +9,12 @@
     "browser": true,
     "react-native/react-native": true
   },
-  "plugins": ["react", "react-native", "react-hooks", "@typescript-eslint", "prettier"],
+  "plugins": [
+    "react",
+    "react-native",
+    "react-hooks",
+    "prettier"
+  ],
   "extends": ["eslint:recommended", "plugin:react/recommended"],
   "rules": {
     "react/prop-types": "off",

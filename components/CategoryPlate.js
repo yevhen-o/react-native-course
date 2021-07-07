@@ -1,13 +1,20 @@
 import React from 'react';
-import {TouchableOpacity, StyleSheet} from 'react-native';
+import { TouchableOpacity, StyleSheet } from 'react-native';
 
 import Card from './Card';
 import BodyText from './BodyText';
 
 const CategoryPlate = (props) => {
   return (
-    <Card style={{...styles.category, ...props.style, backgroundColor: props.item.color}}>
-      <TouchableOpacity style={styles.link} onPress={props.onSelect.bind(null, props.item)}>
+    <Card
+      style={{
+        ...styles.category,
+        ...props.style,
+        backgroundColor: props.item.color,
+      }}>
+      <TouchableOpacity
+        style={styles.link}
+        onPress={props.onSelect.bind(null, props.item)}>
         <BodyText numberOfLines={1}>{props.item.title}</BodyText>
       </TouchableOpacity>
     </Card>

@@ -1,15 +1,23 @@
 import React from 'react';
-import {TouchableOpacity, StyleSheet, ImageBackground, View} from 'react-native';
+import {
+  TouchableOpacity,
+  StyleSheet,
+  ImageBackground,
+  View,
+} from 'react-native';
 
 import Card from 'components/Card';
 import PText from 'components/PText';
-import {COLORS} from 'common/constants';
+import { COLORS } from 'common/constants';
 
-const MealPlate = ({item: {title, imageUrl, affordability, duration, complexity}, onSelect}) => {
+const MealPlate = ({
+  item: { title, imageUrl, affordability, duration, complexity },
+  onSelect,
+}) => {
   return (
-    <Card style={{...styles.category, backgroundColor: COLORS.light}}>
+    <Card style={{ ...styles.category, backgroundColor: COLORS.light }}>
       <TouchableOpacity style={styles.link} onPress={onSelect}>
-        <ImageBackground style={styles.image} source={{uri: imageUrl}}>
+        <ImageBackground style={styles.image} source={{ uri: imageUrl }}>
           <PText numberOfLines={3} style={styles.title}>
             {title}
           </PText>

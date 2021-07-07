@@ -1,9 +1,18 @@
 import React from 'react';
-import {StyleSheet, Text} from 'react-native';
+import { StyleSheet, Text } from 'react-native';
 
-import {COLORS} from 'common/constants';
+import { COLORS } from 'common/constants';
 
-const PText = ({style, children, isBold, isH1, isH2, isH3, isH4, ...restProps}) => {
+const PText = ({
+  style,
+  children,
+  isBold,
+  isH1,
+  isH2,
+  isH3,
+  isH4,
+  ...restProps
+}) => {
   const getStyles = () => {
     const style = {
       fontWeight: 'bold',
@@ -50,7 +59,7 @@ const PText = ({style, children, isBold, isH1, isH2, isH3, isH4, ...restProps}) 
   });
 
   return (
-    <Text style={{...styles.bodyText, ...style}} {...restProps}>
+    <Text style={{ ...styles.bodyText, ...style }} {...restProps}>
       {children}
     </Text>
   );

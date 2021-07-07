@@ -1,11 +1,18 @@
-import React, {useState} from 'react';
-import {StyleSheet, Text, View, Button, TouchableOpacity, ScrollView} from 'react-native';
+import React, { useState } from 'react';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Button,
+  TouchableOpacity,
+  ScrollView,
+} from 'react-native';
 
 import Head from 'components/Head';
 import TextInput from 'components/TextInput';
 
 import PText from 'components/PText';
-import {COLORS} from 'common/constants';
+import { COLORS } from 'common/constants';
 
 const GoalsScreen = () => {
   const [text, setText] = useState('My first RN app!!!');
@@ -51,7 +58,10 @@ const GoalsScreen = () => {
       <Text>{text}</Text>
       <Text>Not bad, at all...</Text>
 
-      <Button title="Change text" onPress={() => setText('The button works correct!!!')} />
+      <Button
+        title="Change text"
+        onPress={() => setText('The button works correct!!!')}
+      />
 
       <PText>Normal regular app text</PText>
       <PText isBold>Bold regular app text</PText>

@@ -1,11 +1,17 @@
-import React, {useLayoutEffect} from 'react';
-import {View, StyleSheet, ScrollView, Switch, TouchableOpacity} from 'react-native';
-import {useState} from 'react/cjs/react.development';
+import React, { useLayoutEffect } from 'react';
+import {
+  View,
+  StyleSheet,
+  ScrollView,
+  Switch,
+  TouchableOpacity,
+} from 'react-native';
+import { useState } from 'react/cjs/react.development';
 
 import BodyText from 'components/BodyText';
 import IonIcons from 'components/IonIcons';
 
-const Filters = ({navigation, route}) => {
+const Filters = ({ navigation, route }) => {
   const [filterValues, setFilterValues] = useState({
     isGlutenFree: false,
     isLactoseFree: false,
@@ -26,7 +32,7 @@ const Filters = ({navigation, route}) => {
               alert('Will apply save setting someday!');
               saveButtonHandler(filterValues);
             }}>
-            <IonIcons style={{marginRight: 10}} name={'save'} />
+            <IonIcons style={{ marginRight: 10 }} name={'save'} />
           </TouchableOpacity>
         );
       },
@@ -34,10 +40,10 @@ const Filters = ({navigation, route}) => {
   }, [navigation, route, filterValues]);
 
   const filters = [
-    {label: 'Is GlutenFree', key: 'isGlutenFree'},
-    {label: 'Is LactoseFree', key: 'isLactoseFree'},
-    {label: 'Is Vegetarian', key: 'isVegetarian'},
-    {label: 'Is Vegan', key: 'isVegan'},
+    { label: 'Is GlutenFree', key: 'isGlutenFree' },
+    { label: 'Is LactoseFree', key: 'isLactoseFree' },
+    { label: 'Is Vegetarian', key: 'isVegetarian' },
+    { label: 'Is Vegan', key: 'isVegan' },
   ];
 
   const handleFilterChange = (key) => (newValue) => {
@@ -52,7 +58,10 @@ const Filters = ({navigation, route}) => {
       {filters.map((row) => (
         <View style={styles.row} key={row.key}>
           <BodyText style={styles.label}>{row.label}</BodyText>
-          <Switch value={filterValues[row.key]} onValueChange={handleFilterChange(row.key)} />
+          <Switch
+            value={filterValues[row.key]}
+            onValueChange={handleFilterChange(row.key)}
+          />
         </View>
       ))}
     </ScrollView>

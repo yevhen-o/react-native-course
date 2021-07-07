@@ -54,7 +54,13 @@ export const MEALS = [
     'simple',
     'https://cdn.pixabay.com/photo/2018/07/11/21/51/toast-3532016_1280.jpg',
     10,
-    ['1 Slice White Bread', '1 Slice Ham', '1 Slice Pineapple', '1-2 Slices of Cheese', 'Butter'],
+    [
+      '1 Slice White Bread',
+      '1 Slice Ham',
+      '1 Slice Pineapple',
+      '1-2 Slices of Cheese',
+      'Butter',
+    ],
     [
       'Butter one side of the white bread',
       'Layer ham, the pineapple and cheese on the white bread',
@@ -74,7 +80,14 @@ export const MEALS = [
     'simple',
     'https://cdn.pixabay.com/photo/2014/10/23/18/05/burger-500054_1280.jpg',
     45,
-    ['300g Cattle Hack', '1 Tomato', '1 Cucumber', '1 Onion', 'Ketchup', '2 Burger Buns'],
+    [
+      '300g Cattle Hack',
+      '1 Tomato',
+      '1 Cucumber',
+      '1 Onion',
+      'Ketchup',
+      '2 Burger Buns',
+    ],
     [
       'Form 2 patties',
       'Fry the patties for c. 4 minutes on each side',

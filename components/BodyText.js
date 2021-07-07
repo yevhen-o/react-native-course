@@ -1,8 +1,8 @@
 import React from 'react';
-import {StyleSheet, Text} from 'react-native';
+import { StyleSheet, Text } from 'react-native';
 
 const BodyText = (props) => (
-  <Text style={{...styles.bodyText, ...(props.style || {})}} {...props}>
+  <Text style={{ ...styles.bodyText, ...(props.style || {}) }} {...props}>
     {props.children}
   </Text>
 );
