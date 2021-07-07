@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
+    "baseUrl": "."
   },
   //Add any build/compiled folders here to stop vscode searching those
   "exclude": [".expo", ".expo-shared", "node_modules"]

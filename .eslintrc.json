@@ -9,7 +9,7 @@
     "browser": true,
     "react-native/react-native": true
   },
-  "plugins": ["react", "react-native"],
+  "plugins": ["react", "react-native", "react-hooks", "@typescript-eslint", "prettier"],
   "extends": ["eslint:recommended", "plugin:react/recommended"],
   "rules": {
     "react/prop-types": "off",
@@ -21,10 +21,11 @@
     "react-native/sort-styles": [
       "error",
       "asc",
-       {
-         "ignoreClassNames": false,
-         "ignoreStyleProperties": false
-       }
-     ]
+      {
+        "ignoreClassNames": false,
+        "ignoreStyleProperties": false
+      }
+    ],
+    "prettier/prettier": 2
   }
 }

@@ -1,30 +1,31 @@
-import { COLORS } from 'common/constants';
-import React, { useState } from 'react';
-import { StyleSheet, View, TextInput } from 'react-native';
+import {COLORS} from 'common/constants';
+import React, {useState} from 'react';
+import {StyleSheet, View, TextInput} from 'react-native';
 
 import FieldLabel from './FieldLabel';
 
-const InputField = props => {
+const InputField = (props) => {
+  const [inputValue, setValue] = useState(props.value || '');
+  const [isFocused, setIsFocused] = useState(false);
 
-  const [inputValue, setValue] = useState(props.value || '')
-  const [isFocused, setIsFocused] = useState(false)
-
-  const onInputChange = text => {
-    if(props.onChange && typeof props.onChange === 'function'){
-      props.onChange(text)
+  const onInputChange = (text) => {
+    if (props.onChange && typeof props.onChange === 'function') {
+      props.onChange(text);
     } else {
-      setValue(text)
+      setValue(text);
     }
-  }
+  };
 
-  const handleFocus = isFocused => () => {
-    setIsFocused(isFocused)
-  }
+  const handleFocus = (isFocused) => () => {
+    setIsFocused(isFocused);
+  };
 
   return (
     <View style={styles.container}>
-      <FieldLabel isFloating isFloated={isFocused || !!inputValue || !!props.placeholder}>{props.label}</FieldLabel>
-      <TextInput 
+      <FieldLabel isFloating isFloated={isFocused || !!inputValue || !!props.placeholder}>
+        {props.label}
+      </FieldLabel>
+      <TextInput
         {...props}
         onFocus={handleFocus(true)}
         onBlur={handleFocus(false)}
@@ -34,14 +35,14 @@ const InputField = props => {
         style={[styles.input, isFocused ? styles.isFocused : '']}
       />
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
     marginBottom: 14,
     marginTop: 14,
-    paddingTop: 12, 
+    paddingTop: 12,
     position: 'relative',
   },
   input: {
@@ -50,7 +51,7 @@ const styles = StyleSheet.create({
   },
   isFocused: {
     borderBottomColor: COLORS.accent,
-  }
-})
+  },
+});
 
 export default InputField;

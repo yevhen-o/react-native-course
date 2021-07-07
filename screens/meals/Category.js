@@ -1,11 +1,10 @@
-import React, { useLayoutEffect, useState } from 'react';
+import React, {useLayoutEffect, useState} from 'react';
 
-import { MEALS } from 'data/dummyData';
+import {MEALS} from 'data/dummyData';
 import PlatesList from 'components/PlatesList';
 
 const Category = ({navigation, route}) => {
-
-  const [categoryMeal, setCategoryMeal] = useState([])
+  const [categoryMeal, setCategoryMeal] = useState([]);
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -18,12 +17,10 @@ const Category = ({navigation, route}) => {
         fontWeight: 'bold',
       },
     });
-    setCategoryMeal(MEALS.filter(meal => meal.categoryIds.includes(route.params.item.id)))
+    setCategoryMeal(MEALS.filter((meal) => meal.categoryIds.includes(route.params.item.id)));
   }, [navigation, route]);
 
-  return (
-    <PlatesList data={categoryMeal} color={route.params.item.color} navigation={navigation} />
-  )
-}
+  return <PlatesList data={categoryMeal} color={route.params.item.color} navigation={navigation} />;
+};
 
 export default Category;

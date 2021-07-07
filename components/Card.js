@@ -1,17 +1,14 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
-import { COLORS } from 'common/constants';
+import {View, StyleSheet} from 'react-native';
+import {COLORS} from 'common/constants';
 
-const Card = props => {
-
+const Card = (props) => {
   return (
     <View style={{...styles.card, ...props.style}}>
-      <View style={{...styles.content}}>
-        {props.children}
-      </View>
+      <View style={{...styles.content}}>{props.children}</View>
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   card: {
@@ -29,7 +26,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     flexGrow: 1,
-  }
-})
+  },
+});
 
 export default Card;
