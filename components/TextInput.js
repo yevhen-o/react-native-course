@@ -4,13 +4,13 @@ import { StyleSheet, View, TextInput } from 'react-native';
 
 import FieldLabel from './FieldLabel';
 
-const InputField = (props) => {
-  const [inputValue, setValue] = useState(props.value || '');
+const InputField = ({ onChange, value, placeholder, label, ...restProps }) => {
+  const [inputValue, setValue] = useState(value || '');
   const [isFocused, setIsFocused] = useState(false);
 
   const onInputChange = (text) => {
-    if (props.onChange && typeof props.onChange === 'function') {
-      props.onChange(text);
+    if (onChange && typeof onChange === 'function') {
+      onChange(text);
     } else {
       setValue(text);
     }
@@ -24,16 +24,16 @@ const InputField = (props) => {
     <View style={styles.container}>
       <FieldLabel
         isFloating
-        isFloated={isFocused || !!inputValue || !!props.placeholder}>
-        {props.label}
+        isFloated={isFocused || !!value || !!inputValue || !!placeholder}>
+        {label}
       </FieldLabel>
       <TextInput
-        {...props}
+        {...restProps}
         onFocus={handleFocus(true)}
         onBlur={handleFocus(false)}
-        placeholder={props.placeholder}
+        placeholder={placeholder}
         onChangeText={onInputChange}
-        value={props.value || inputValue}
+        value={value || inputValue}
         style={[styles.input, isFocused ? styles.isFocused : '']}
       />
     </View>

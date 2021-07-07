@@ -13,7 +13,9 @@ import Category from 'screens/meals/Category';
 import Favorite from 'screens/meals/Favorite';
 import Categories from 'screens/meals/Categories';
 import MealDetail from 'screens/meals/MealDetail';
-import ComponentsScreen from 'screens/Components';
+import Headings from 'screens/Components/TextComponents';
+import Buttons from 'screens/Components/Buttons';
+import FormElements from 'screens/Components/FormElements';
 
 import IonIcons from 'components/IonIcons';
 
@@ -23,7 +25,6 @@ const FavoriteMealsStack = createStackNavigator();
 
 const GameStack = createStackNavigator();
 const GoalsStack = createStackNavigator();
-const ComponentsStack = createStackNavigator();
 
 export const SCREENS = {
   Home: 'Home',
@@ -35,6 +36,10 @@ export const SCREENS = {
   Categories: 'Categories',
   MealDetail: 'MealDetail',
   Components: 'Components',
+
+  Headings: 'Headings',
+  Buttons: 'Buttons',
+  FormElements: 'FormElements',
 
   MealsStack: 'MealsStack',
   FilterStack: 'FilterStack',
@@ -156,18 +161,6 @@ const GoalsStackNavigator = () => (
   </GoalsStack.Navigator>
 );
 
-const ComponentsStackNavigator = () => (
-  <ComponentsStack.Navigator initialRouteName={SCREENS.Components}>
-    <ComponentsStack.Screen
-      name={SCREENS.Components}
-      component={ComponentsScreen}
-      options={(...args) => {
-        return { title: 'Components', ...renderMenu(...args) };
-      }}
-    />
-  </ComponentsStack.Navigator>
-);
-
 const GameStackNavigator = () => (
   <GameStack.Navigator initialRouteName={SCREENS.Game}>
     <GameStack.Screen
@@ -181,6 +174,7 @@ const GameStackNavigator = () => (
 );
 
 const Tab = createBottomTabNavigator();
+const ComponentsTab = createBottomTabNavigator();
 
 const renderIcon = (iconName) =>
   function addIcon({ color, size }) {
@@ -207,6 +201,35 @@ const MealsAppTabNavigator = () => (
   </Tab.Navigator>
 );
 
+const ComponentsAppTabNavigator = () => (
+  <ComponentsTab.Navigator>
+    <ComponentsTab.Screen
+      name={SCREENS.Headings}
+      component={Headings}
+      options={{
+        title: 'Headings',
+        tabBarIcon: renderIcon('document-text-outline'),
+      }}
+    />
+    <ComponentsTab.Screen
+      name={SCREENS.Buttons}
+      component={Buttons}
+      options={{
+        title: 'Buttons',
+        tabBarIcon: renderIcon('game-controller-outline'),
+      }}
+    />
+    <ComponentsTab.Screen
+      name={SCREENS.FormElements}
+      component={FormElements}
+      options={{
+        title: 'Forms',
+        tabBarIcon: renderIcon('exit-outline'),
+      }}
+    />
+  </ComponentsTab.Navigator>
+);
+
 const Drawer = createDrawerNavigator();
 
 const MainNavigator = () => {
@@ -220,7 +243,7 @@ const MainNavigator = () => {
         />
         <Drawer.Screen
           name={SCREENS.Components}
-          component={ComponentsStackNavigator}
+          component={ComponentsAppTabNavigator}
           options={{ title: 'Components' }}
         />
         <Drawer.Screen
