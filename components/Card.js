@@ -12,20 +12,20 @@ const Card = (props) => {
 
 const styles = StyleSheet.create({
   card: {
-    alignItems: 'center',
-    borderRadius: 10,
-    elevation: 3,
     flex: 1,
-    justifyContent: 'center',
-    overflow: 'hidden',
-    shadowColor: COLORS.primary,
-    shadowOpacity: 0.26,
+    elevation: 3,
+    borderRadius: 10,
     shadowRadius: 10,
+    overflow: 'hidden',
+    shadowOpacity: 0.26,
+    alignItems: 'center',
+    justifyContent: 'center',
+    shadowColor: COLORS.primary,
   },
   content: {
     flex: 1,
-    flexDirection: 'row',
     flexGrow: 1,
+    flexDirection: 'row',
   },
 });
 
