@@ -3,7 +3,7 @@ import React, { useLayoutEffect, useState } from 'react';
 import { MEALS } from 'data/dummyData';
 import PlatesList from 'components/PlatesList';
 
-const Category = ({navigation, route, ...props}) => {
+const Category = ({navigation, route}) => {
 
   const [categoryMeal, setCategoryMeal] = useState([])
 

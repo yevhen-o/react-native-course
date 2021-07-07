@@ -1,5 +1,4 @@
 import React, { useLayoutEffect } from 'react';
-import { StyleSheet } from 'react-native';
 
 import { MEALS } from 'data/dummyData';
 import { COLORS } from 'common/constants';
@@ -25,13 +24,5 @@ const Favorites = ({ navigation, route }) => {
     <PlatesList data={favorites} color={COLORS.accent} navigation={navigation} />
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  }
-})
 
 export default Favorites;

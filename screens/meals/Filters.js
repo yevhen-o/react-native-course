@@ -20,7 +20,7 @@ const Filters = ({ navigation, route }) => {
 
   useLayoutEffect(() => {
     navigation.setOptions({
-      headerRight: (params) => {
+      headerRight: function saveSettings () {
         return (
           <TouchableOpacity
             onPress={() => {
@@ -62,16 +62,16 @@ const Filters = ({ navigation, route }) => {
 }
 
 const styles = StyleSheet.create({
-  row: {
-    justifyContent: 'space-between',
-    flex: 1, 
-    padding: 10, 
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingLeft: 20,
-  },
   label: {
     fontWeight: 'bold',
+  },
+  row: {
+    alignItems: 'center',
+    flex: 1, 
+    flexDirection: 'row', 
+    justifyContent: 'space-between',
+    padding: 10,
+    paddingLeft: 20,
   }
 })
 

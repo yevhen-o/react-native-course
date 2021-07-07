@@ -13,19 +13,19 @@ const FieldLabel = ({children, isFloated, isFloating}) => {
 }
 
 const styles = StyleSheet.create({
-  text: {
-    color: '#444',
-    fontSize: 16,
-  },
   isFloated: {
     color: '#999',
     fontSize: 12,
     top: 0,
   },
   isFloating: {
+    left: 0,
     position: 'absolute',
     top: 10,
-    left: 0,
+  },
+  text: {
+    color: '#444',
+    fontSize: 16,
   }
 })
 

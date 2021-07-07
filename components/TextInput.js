@@ -1,5 +1,6 @@
+import { COLORS } from 'common/constants';
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput } from 'react-native';
+import { StyleSheet, View, TextInput } from 'react-native';
 
 import FieldLabel from './FieldLabel';
 
@@ -38,17 +39,17 @@ const InputField = props => {
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 12,
-    position: 'relative',
-    marginTop: 14, 
     marginBottom: 14,
+    marginTop: 14,
+    paddingTop: 12, 
+    position: 'relative',
   },
   input: {
-    borderBottomColor: '#000',
+    borderBottomColor: COLORS.primary,
     borderBottomWidth: 2,
   },
   isFocused: {
-    borderBottomColor: 'rgba(86, 252, 3, 0.5)',
+    borderBottomColor: COLORS.accent,
   }
 })
 

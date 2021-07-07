@@ -1,5 +1,5 @@
 import React, { useLayoutEffect } from 'react';
-import { View, StyleSheet, ScrollView, Image, Button, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, ScrollView, Image, TouchableOpacity } from 'react-native';
 
 import { COLORS } from 'common/constants';
 
@@ -8,7 +8,7 @@ import BodyText from 'components/BodyText';
 import ErrorText from 'components/ErrorText';
 import { useState } from 'react/cjs/react.development';
 
-const MealDetail = ({navigation, route, ...props}) => {
+const MealDetail = ({navigation, route}) => {
 
   const item = route.params.item;
 
@@ -16,7 +16,7 @@ const MealDetail = ({navigation, route, ...props}) => {
     return <ErrorText>Please select some Meal2</ErrorText>
   }
 
-  const [isFavorited, setIsFavorited] = useState(false)
+  const [isFavorite, setIsFavorite] = useState(false)
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -28,25 +28,25 @@ const MealDetail = ({navigation, route, ...props}) => {
       headerTitleStyle: {
         fontWeight: 'bold',
       },
-      headerRight: (params) => {
+      headerRight: function addToFavorite(params){
         return (
           <TouchableOpacity
           onPress={() => {
             alert('Will add to favorite soon');
-            setIsFavorited(!isFavorited);
+            setIsFavorite(!isFavorite);
           }}
         >
-          <IonIcons style={{ marginRight: 10 }} color={params.tintColor} name={isFavorited ? 'star' : 'star-outline'} />
+          <IonIcons style={{ marginRight: 10 }} color={params.tintColor} name={isFavorite ? 'star' : 'star-outline'} />
         </TouchableOpacity>
         )
       },
     });
-  }, [navigation, route, isFavorited]);
+  }, [navigation, route, isFavorite]);
   
   const renderList = (list, title) => (
     <View style={styles.list}>
       <BodyText style={styles.title}>{title}</BodyText>
-      {list.map(item => <BodyText style={styles.listItem}>{item}</BodyText>)}
+      {list.map(item => <BodyText key={item} style={styles.listItem}>{item}</BodyText>)}
     </View>
   )
   
@@ -54,7 +54,7 @@ const MealDetail = ({navigation, route, ...props}) => {
     <View style={styles.list}>
       <BodyText style={styles.title}>{title}</BodyText>
       {list.map((item, index) => (
-        <View style={styles.listItem}>
+        <View key={index} style={styles.listItem}>
           <BodyText style={{marginRight: 8, fontWeight: 'bold'}}>{index + 1}</BodyText>
           <BodyText>{item}</BodyText>
         </View>
@@ -82,23 +82,12 @@ const MealDetail = ({navigation, route, ...props}) => {
 }
 
 const styles = StyleSheet.create({
-  wrapper: {
-    paddingHorizontal: 14,
-  },
   image: {
-    width: '100%',
     height: 300,
+    width: '100%',
   },
   info: {
     marginVertical: 10,
-  },
-  title: {
-    fontSize: 22,
-    fontWeight: 'bold',
-    borderBottomWidth: 2,
-    borderColor: COLORS.accent,
-    marginBottom: 8,
-    paddingBottom: 4,
   },
   list: {
     marginBottom: 14,
@@ -106,6 +95,17 @@ const styles = StyleSheet.create({
   listItem: {
     flexDirection: 'row',
     marginBottom: 8,
+  },
+  title: {
+    borderBottomWidth: 2,
+    borderColor: COLORS.accent,
+    fontSize: 22,
+    fontWeight: 'bold',
+    marginBottom: 8,
+    paddingBottom: 4,
+  },
+  wrapper: {
+    paddingHorizontal: 14,
   }
 })
 

@@ -11,13 +11,13 @@ const Head = () => {
 
 const styles = StyleSheet.create({
   head: {
+    alignItems: 'center',
     backgroundColor: "rgba(86, 252, 3, 0.5)",
+    justifyContent: 'center',
+    marginBottom: 8,
     marginLeft: -8,
     marginRight: -8,
-    marginBottom: 8,
     padding: 8,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
 });
 

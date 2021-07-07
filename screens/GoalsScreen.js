@@ -5,6 +5,7 @@ import Head from 'components/Head';
 import TextInput from 'components/TextInput';
 
 import PText from 'components/PText';
+import { COLORS } from 'common/constants';
 
 const GoalsScreen = () => {
 
@@ -63,18 +64,18 @@ const GoalsScreen = () => {
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: COLORS.light,
     flex: 1,
-    backgroundColor: "#fff",
-    paddingTop: 20,
+    paddingBottom: 8,
     paddingLeft: 8,
     paddingRight: 8,
-    paddingBottom: 8,
+    paddingTop: 20,
   },
   item: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingTop: 14, 
-    paddingBottom: 14,
+    paddingBottom: 14, 
+    paddingTop: 14,
   }
 });
 

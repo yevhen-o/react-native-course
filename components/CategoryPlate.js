@@ -22,8 +22,8 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   link: {
-    flex: 1, 
     alignItems: 'center', 
+    flex: 1, 
     justifyContent: 'space-around',
   }
 })

@@ -15,20 +15,20 @@ const Card = props => {
 
 const styles = StyleSheet.create({
   card: {
+    alignItems: 'center',
+    borderRadius: 10,
+    elevation: 3,
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
-    elevation: 3,
+    overflow: 'hidden',
     shadowColor: COLORS.primary,
     shadowOpacity: 0.26,
     shadowRadius: 10,
-    borderRadius: 10,
-    overflow: 'hidden',
   },
   content: {
     flex: 1,
-    flexGrow: 1,
     flexDirection: 'row',
+    flexGrow: 1,
   }
 })
 

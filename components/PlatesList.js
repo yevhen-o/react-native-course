@@ -4,7 +4,7 @@ import { FlatList } from 'react-native';
 import MealPlate from 'components/MealPlate';
 import { SCREENS } from 'navigation/MainNavigator';
 
-const PlateList = ({navigation, data, color, ...props}) => {
+const PlateList = ({navigation, data, color}) => {
 
   const renderItem = ({item}) => { 
     return (<MealPlate item={item} onSelect={() => {navigation.navigate({name: SCREENS.MealDetail, params: { item: { ...item, color } }})}} />)

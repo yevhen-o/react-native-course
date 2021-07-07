@@ -16,7 +16,7 @@ const ErrorText = props => {
 }
 
 const styles = StyleSheet.create({
-  container: {margin: 20, padding: 20, backgroundColor: COLORS.light, flex: undefined, height: 'auto', flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start'},
+  container: {alignItems: 'center', backgroundColor: COLORS.light, flex: undefined, flexDirection: 'row', height: 'auto', justifyContent: 'flex-start', margin: 20, padding: 20},
   text: {marginLeft: 20}
 })
 
