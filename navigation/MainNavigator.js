@@ -13,6 +13,7 @@ import Category from 'screens/meals/Category';
 import Favorite from 'screens/meals/Favorite';
 import Categories from 'screens/meals/Categories';
 import MealDetail from 'screens/meals/MealDetail';
+import ComponentsScreen from 'screens/Components';
 
 import IonIcons from 'components/IonIcons';
 
@@ -21,7 +22,8 @@ const FilterMealsStack = createStackNavigator();
 const FavoriteMealsStack = createStackNavigator();
 
 const GameStack = createStackNavigator();
-const ComponentStack = createStackNavigator();
+const GoalsStack = createStackNavigator();
+const ComponentsStack = createStackNavigator();
 
 export const SCREENS = {
   Home: 'Home',
@@ -142,16 +144,28 @@ const MealsAppFilterStackNavigator = () => (
   </FilterMealsStack.Navigator>
 );
 
-const ComponentStackNavigator = () => (
-  <ComponentStack.Navigator initialRouteName={SCREENS.Components}>
-    <ComponentStack.Screen
+const GoalsStackNavigator = () => (
+  <GoalsStack.Navigator initialRouteName={SCREENS.Components}>
+    <GoalsStack.Screen
       name={SCREENS.Components}
       component={GoalsScreen}
       options={(...args) => {
-        return { title: 'Components && Goals', ...renderMenu(...args) };
+        return { title: 'Goals app', ...renderMenu(...args) };
       }}
     />
-  </ComponentStack.Navigator>
+  </GoalsStack.Navigator>
+);
+
+const ComponentsStackNavigator = () => (
+  <ComponentsStack.Navigator initialRouteName={SCREENS.Components}>
+    <ComponentsStack.Screen
+      name={SCREENS.Components}
+      component={ComponentsScreen}
+      options={(...args) => {
+        return { title: 'Components', ...renderMenu(...args) };
+      }}
+    />
+  </ComponentsStack.Navigator>
 );
 
 const GameStackNavigator = () => (
@@ -201,8 +215,13 @@ const MainNavigator = () => {
       <Drawer.Navigator initialRouteName={SCREENS.Home}>
         <Drawer.Screen
           name={SCREENS.Goals}
-          component={ComponentStackNavigator}
-          options={{ title: 'Components && Goals' }}
+          component={GoalsStackNavigator}
+          options={{ title: 'Goals App' }}
+        />
+        <Drawer.Screen
+          name={SCREENS.Components}
+          component={ComponentsStackNavigator}
+          options={{ title: 'Components' }}
         />
         <Drawer.Screen
           name={SCREENS.Home}

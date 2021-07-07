@@ -5,7 +5,7 @@ import { StyleSheet, Text, View } from 'react-native';
 const Head = () => {
   return (
     <View style={styles.head}>
-      <Text>My firs React Native app</Text>
+      <Text>My firs React Native Goals App</Text>
     </View>
   );
 };
