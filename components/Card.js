@@ -5,7 +5,7 @@ import {COLORS} from 'common/constants';
 const Card = (props) => {
   return (
     <View style={{...styles.card, ...props.style}}>
-        <View style={{...styles.content}}>{props.children}</View>
+          <View style={{...styles.content}}>{props.children}</View>
     </View>
   );
 };
@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
     elevation: 3,
     borderRadius: 10,
     shadowRadius: 10,
-    overflow: 'hidden',
+    overflow: 'hidden', 
     shadowOpacity: 0.26,
     alignItems: 'center',
     justifyContent: 'center',
