@@ -5,7 +5,7 @@ import {COLORS} from 'common/constants';
 const Card = (props) => {
   return (
     <View style={{...styles.card, ...props.style}}>
-      <View style={{...styles.content}}>{props.children}</View>
+        <View style={{...styles.content}}>{props.children}</View>
     </View>
   );
 };
