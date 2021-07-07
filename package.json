@@ -39,16 +39,18 @@
     "lint-staged": "^11.0.0",
     "prettier": "^2.3.2"
   },
+  "lint-staged": {
+    "./**/*.{ts,tsx,js,jsx}": [
+      "eslint --ext .tsx --ext .ts --ext .js --ext .jsx ./ --fix"
+    ],
+    "./**": [
+      "prettier --write ."
+    ]
+  },
   "husky": {
     "hooks": {
-      "pre-commit": "echo \"[Husky] pre-commit\""
+      "pre-commit": "lint-staged"
     }
-  },
-  "lint-staged": {
-    "./*.{js,jsx,ts,tsx}": [
-      "npx prettier --write",
-      "eslint ./*.js --fix-dry-run"
-    ]
   },
   "private": true
 }
