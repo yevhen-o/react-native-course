@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 
 import { MEALS } from 'data/dummyData';
 import PlatesList from 'components/PlatesList';
+import NothingToDisplay from 'components/NothingToDisplay';
 
 const Category = ({ navigation, route }) => {
   const [categoryMeal, setCategoryMeal] = useState([]);
@@ -37,9 +38,17 @@ const Category = ({ navigation, route }) => {
     return true;
   };
 
+  const dataToDisplay = categoryMeal.filter(filterByFilters);
+
+  if (!dataToDisplay.length) {
+    return (
+      <NothingToDisplay isFiltered={Object.values(filters).some((k) => !!k)} />
+    );
+  }
+
   return (
     <PlatesList
-      data={categoryMeal.filter(filterByFilters)}
+      data={dataToDisplay}
       color={route.params.item.color}
       navigation={navigation}
     />
