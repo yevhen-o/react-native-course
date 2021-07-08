@@ -2,7 +2,7 @@ import { COLORS } from 'common/constants';
 import React from 'react';
 import { StyleSheet, Text } from 'react-native';
 
-const FieldLabel = ({ children, isFloated, isFloating }) => {
+const FieldLabel = ({ children, isFloated, isFloating, hasError }) => {
   if (!children) {
     return null;
   }
@@ -13,6 +13,7 @@ const FieldLabel = ({ children, isFloated, isFloating }) => {
         styles.text,
         ...(isFloating ? [styles.isFloating] : []),
         ...(isFloated ? [styles.isFloated] : []),
+        ...(hasError ? [styles.hasError] : []),
       ]}>
       {children}
     </Text>
@@ -20,6 +21,9 @@ const FieldLabel = ({ children, isFloated, isFloating }) => {
 };
 
 const styles = StyleSheet.create({
+  hasError: {
+    color: COLORS.error,
+  },
   isFloated: {
     color: COLORS.primary,
     fontSize: 12,

@@ -3,6 +3,7 @@ export const COLORS = {
   accent: '#ff6f00',
   light: '#ffffff',
   disabled: '#999999',
+  error: '#f30000',
 };
 
 export const SPACES = {

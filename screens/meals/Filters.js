@@ -1,15 +1,10 @@
 import React, { useLayoutEffect } from 'react';
-import {
-  View,
-  StyleSheet,
-  ScrollView,
-  Switch,
-  TouchableOpacity,
-} from 'react-native';
+import { StyleSheet, ScrollView, TouchableOpacity, View } from 'react-native';
 import { useState } from 'react/cjs/react.development';
 
-import BodyText from 'components/BodyText';
+import PSwitch from 'components/PSwitch';
 import IonIcons from 'components/IonIcons';
+import { SPACES } from 'common/constants';
 
 const Filters = ({ navigation, route }) => {
   const [filterValues, setFilterValues] = useState({
@@ -55,30 +50,24 @@ const Filters = ({ navigation, route }) => {
 
   return (
     <ScrollView>
-      {filters.map((row) => (
-        <View style={styles.row} key={row.key}>
-          <BodyText style={styles.label}>{row.label}</BodyText>
-          <Switch
+      <View style={styles.container}>
+        {filters.map((row) => (
+          <PSwitch
+            key={row.key}
+            label={row.label}
             value={filterValues[row.key]}
             onValueChange={handleFilterChange(row.key)}
           />
-        </View>
-      ))}
+        ))}
+      </View>
     </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
-  label: {
-    fontWeight: 'bold',
-  },
-  row: {
-    alignItems: 'center',
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    padding: 10,
-    paddingLeft: 20,
+  container: {
+    padding: SPACES.regular,
+    paddingRight: SPACES.xSmall,
   },
 });
 
