@@ -1,21 +1,21 @@
 import React, { useLayoutEffect } from 'react';
 import { StyleSheet, ScrollView, TouchableOpacity, View } from 'react-native';
 import { useState } from 'react/cjs/react.development';
+import { useSelector, useDispatch } from 'react-redux';
 
 import PSwitch from 'components/PSwitch';
 import IonIcons from 'components/IonIcons';
 import { SPACES } from 'common/constants';
+import { mealsUpdateFilters } from 'redux/actions/mealsActions';
 
 const Filters = ({ navigation, route }) => {
-  const [filterValues, setFilterValues] = useState({
-    isGlutenFree: false,
-    isLactoseFree: false,
-    isVegetarian: false,
-    isVegan: false,
-  });
+  const actualFilters = useSelector((state) => state.meals.filters);
+  const [filterValues, setFilterValues] = useState(actualFilters);
+
+  const dispatch = useDispatch();
 
   const saveButtonHandler = (values) => {
-    console.log(values);
+    dispatch(mealsUpdateFilters(values));
   };
 
   useLayoutEffect(() => {
@@ -24,7 +24,6 @@ const Filters = ({ navigation, route }) => {
         return (
           <TouchableOpacity
             onPress={() => {
-              alert('Will apply save setting someday!');
               saveButtonHandler(filterValues);
             }}>
             <IonIcons style={{ marginRight: 10 }} name={'save'} />

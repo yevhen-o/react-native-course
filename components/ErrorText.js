@@ -3,18 +3,18 @@ import { StyleSheet } from 'react-native';
 
 import Card from 'components/Card';
 import IonIcons from 'components/IonIcons';
-import BodyText from 'components/BodyText';
+import PText from 'components/PText';
 import { COLORS } from '../common/constants';
 
 const ErrorText = (props) => {
   return (
     <Card style={styles.container}>
       <IonIcons color="yellow" name="warning" />
-      <BodyText style={styles.text}>
+      <PText style={styles.text}>
         {props.errorText ||
           props.children ||
           'Something goes wrong, please try again!'}
-      </BodyText>
+      </PText>
     </Card>
   );
 };
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     margin: 20,
     padding: 20,
   },
-  text: { marginLeft: 20 },
+  text: { lineHeight: 24, marginLeft: 20 },
 });
 
 export default ErrorText;

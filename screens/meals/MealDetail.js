@@ -1,4 +1,4 @@
-import React, { useLayoutEffect } from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 import {
   View,
   StyleSheet,
@@ -7,12 +7,14 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
+import { useDispatch, useSelector } from 'react-redux';
+
 import { COLORS } from 'common/constants';
 
 import IonIcons from 'components/IonIcons';
 import BodyText from 'components/BodyText';
 import ErrorText from 'components/ErrorText';
-import { useState } from 'react/cjs/react.development';
+import { toggleMealFavorite } from 'redux/actions/mealsActions';
 
 const MealDetail = ({ navigation, route }) => {
   const item = route.params.item;
@@ -21,7 +23,10 @@ const MealDetail = ({ navigation, route }) => {
     return <ErrorText>Please select some Meal2</ErrorText>;
   }
 
-  const [isFavorite, setIsFavorite] = useState(false);
+  const dispatch = useDispatch();
+  const favorite = useSelector((store) => store.meals.favorite);
+
+  const [isFavorite, setIsFavorite] = useState(favorite.includes(item.id));
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -37,8 +42,8 @@ const MealDetail = ({ navigation, route }) => {
         return (
           <TouchableOpacity
             onPress={() => {
-              alert('Will add to favorite soon');
               setIsFavorite(!isFavorite);
+              dispatch(toggleMealFavorite(route.params.item.id));
             }}>
             <IonIcons
               style={{ marginRight: 10 }}

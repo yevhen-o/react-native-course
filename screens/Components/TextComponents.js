@@ -5,6 +5,8 @@ import { View } from 'react-native';
 import PText from 'components/PText';
 import Card from 'components/Card';
 import PageWrapper from 'components/PageWrapper';
+import NothingToDisplay from 'components/NothingToDisplay';
+import ErrorText from 'components/ErrorText';
 
 const TextComponents = () => {
   return (
@@ -26,6 +28,11 @@ const TextComponents = () => {
             <PText>Normal regular app text</PText>
           </View>
         </Card>
+
+        <PText isH1>Something goes wrong component</PText>
+        <ErrorText />
+        <PText isH1>Nothing to display component</PText>
+        <NothingToDisplay />
       </View>
     </PageWrapper>
   );

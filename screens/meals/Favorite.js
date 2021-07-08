@@ -1,9 +1,11 @@
 import React, { useLayoutEffect } from 'react';
+import { useSelector } from 'react-redux';
 
 import { MEALS } from 'data/dummyData';
 import { COLORS } from 'common/constants';
 
 import PlatesList from 'components/PlatesList';
+import NothingToDisplay from 'components/NothingToDisplay';
 
 const Favorites = ({ navigation, route }) => {
   useLayoutEffect(() => {
@@ -18,9 +20,14 @@ const Favorites = ({ navigation, route }) => {
     });
   }, [navigation, route]);
 
-  const favorites = MEALS.filter((m) =>
-    ['c1', 'c2'].some((c) => m.categoryIds.includes(c)),
-  );
+  const favorite = useSelector((store) => store.meals.favorite);
+
+  const favorites = MEALS.filter((m) => favorite.some((c) => c === m.id));
+
+  if (favorites.length === 0) {
+    return <NothingToDisplay />;
+  }
+
   return (
     <PlatesList
       data={favorites}

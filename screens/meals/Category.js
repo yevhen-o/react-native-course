@@ -1,10 +1,13 @@
 import React, { useLayoutEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 
 import { MEALS } from 'data/dummyData';
 import PlatesList from 'components/PlatesList';
 
 const Category = ({ navigation, route }) => {
   const [categoryMeal, setCategoryMeal] = useState([]);
+
+  const filters = useSelector((state) => state.meals.filters);
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -22,9 +25,21 @@ const Category = ({ navigation, route }) => {
     );
   }, [navigation, route]);
 
+  const filterByFilters = (meal) => {
+    if (
+      (filters.isVegan && !meal.isVegan) ||
+      (filters.isVegetarian && !meal.isVegetarian) ||
+      (filters.isLactoseFree && !meal.isLactoseFree) ||
+      (filters.isGlutenFree && !meal.isGlutenFree)
+    ) {
+      return false;
+    }
+    return true;
+  };
+
   return (
     <PlatesList
-      data={categoryMeal}
+      data={categoryMeal.filter(filterByFilters)}
       color={route.params.item.color}
       navigation={navigation}
     />

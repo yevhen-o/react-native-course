@@ -1,8 +1,17 @@
 import React, { useState } from 'react';
 import AppLoading from 'expo-app-loading';
 import * as Font from 'expo-font';
+import { createStore, combineReducers } from 'redux';
+import { Provider } from 'react-redux';
 
 import MainNavigator from 'navigation/MainNavigator';
+import { mealsReducer } from 'redux/reducers/mealsReducer';
+
+const store = createStore(
+  combineReducers({
+    meals: mealsReducer,
+  }),
+);
 
 const fetchFonts = () => {
   return Font.loadAsync({
@@ -24,5 +33,9 @@ export default function App() {
     );
   }
   console.info('Ready id:', Math.random().toString().replace('0.', ''));
-  return <MainNavigator />;
+  return (
+    <Provider store={store}>
+      <MainNavigator />
+    </Provider>
+  );
 }
