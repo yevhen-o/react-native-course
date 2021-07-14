@@ -6,6 +6,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
+import SCREENS from 'navigation/Screens';
+
 import Filters from 'screens/meals/Filters';
 import GameScreen from 'screens/GameScreen';
 import GoalsScreen from 'screens/GoalsScreen';
@@ -17,6 +19,8 @@ import Headings from 'screens/Components/TextComponents';
 import Buttons from 'screens/Components/Buttons';
 import FormElements from 'screens/Components/FormElements';
 
+import ShopTabNavigator from './ShopNavigator';
+
 import IonIcons from 'components/IonIcons';
 
 const MealsStack = createStackNavigator();
@@ -25,26 +29,6 @@ const FavoriteMealsStack = createStackNavigator();
 
 const GameStack = createStackNavigator();
 const GoalsStack = createStackNavigator();
-
-export const SCREENS = {
-  Home: 'Home',
-  Game: 'Game',
-  Goals: 'Goals',
-  Filters: 'Filters',
-  Category: 'Category',
-  Favorite: 'Favorite',
-  Categories: 'Categories',
-  MealDetail: 'MealDetail',
-  Components: 'Components',
-
-  Headings: 'Headings',
-  Buttons: 'Buttons',
-  FormElements: 'FormElements',
-
-  MealsStack: 'MealsStack',
-  FilterStack: 'FilterStack',
-  FavoriteStack: 'FavoriteStack',
-};
 
 const renderMenu = ({ navigation }) => ({
   headerLeft: function addMenuBtn(params) {
@@ -235,7 +219,7 @@ const Drawer = createDrawerNavigator();
 const MainNavigator = () => {
   return (
     <NavigationContainer>
-      <Drawer.Navigator initialRouteName={SCREENS.Home}>
+      <Drawer.Navigator initialRouteName={SCREENS.Shop}>
         <Drawer.Screen
           name={SCREENS.Goals}
           component={GoalsStackNavigator}
@@ -255,6 +239,11 @@ const MainNavigator = () => {
           name={SCREENS.Game}
           component={GameStackNavigator}
           options={{ title: 'Suggest number game' }}
+        />
+        <Drawer.Screen
+          name={SCREENS.Shop}
+          component={ShopTabNavigator}
+          options={{ title: 'The Shop App' }}
         />
       </Drawer.Navigator>
     </NavigationContainer>

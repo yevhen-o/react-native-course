@@ -1,4 +1,4 @@
-import { AK } from 'redux/ActionsKeys';
+import { AT } from 'redux/ActionsTypes';
 
 const initialState = {
   favorite: [],
@@ -12,14 +12,14 @@ const initialState = {
 
 export const mealsReducer = (state = initialState, action) => {
   switch (action.type) {
-    case AK.MEALS_TOGGLE_FAVORITE:
+    case AT.MEALS_TOGGLE_FAVORITE:
       return {
         ...state,
         favorite: state.favorite.includes(action.mealId)
           ? state.favorite.filter((mId) => mId !== action.mealId)
           : [...state.favorite, action.mealId],
       };
-    case AK.MEALS_UPDATE_FILTERS:
+    case AT.MEALS_UPDATE_FILTERS:
       return {
         ...state,
         filters: action.filters,

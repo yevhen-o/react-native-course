@@ -1,11 +1,11 @@
-import { AK } from 'redux/ActionsKeys';
+import { AT } from 'redux/ActionsTypes';
 
 export const toggleMealFavorite = (mealId) => ({
-  type: AK.MEALS_TOGGLE_FAVORITE,
+  type: AT.MEALS_TOGGLE_FAVORITE,
   mealId,
 });
 
 export const mealsUpdateFilters = (filters) => ({
-  type: AK.MEALS_UPDATE_FILTERS,
+  type: AT.MEALS_UPDATE_FILTERS,
   filters,
 });

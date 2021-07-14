@@ -1,18 +1,19 @@
 import React from 'react';
 import { FlatList } from 'react-native';
 
-import MealPlate from 'components/MealPlate';
+import ProductCard from 'components/ProductCard';
 import SCREENS from 'navigation/Screens';
 
-const PlateList = ({ navigation, data, color }) => {
+const ProductList = ({ navigation, data, renderButtons }) => {
   const renderItem = ({ item }) => {
     return (
-      <MealPlate
+      <ProductCard
         item={item}
+        renderButtons={renderButtons}
         onSelect={() => {
           navigation.navigate({
-            name: SCREENS.MealDetail,
-            params: { item: { ...item, color } },
+            name: SCREENS.ShopProduct,
+            params: { item: { ...item } },
           });
         }}
       />
@@ -29,4 +30,4 @@ const PlateList = ({ navigation, data, color }) => {
   );
 };
 
-export default PlateList;
+export default ProductList;

@@ -2,7 +2,7 @@ import React from 'react';
 import { FlatList } from 'react-native';
 
 import { CATEGORIES } from 'data/dummyData';
-import { SCREENS } from 'navigation/MainNavigator';
+import SCREENS from 'navigation/Screens';
 import CategoryPlate from 'components/CategoryPlate';
 
 const Categories = (props) => {
