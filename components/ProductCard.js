@@ -10,6 +10,8 @@ import Card from 'components/Card';
 import PText from 'components/PText';
 import PButton from 'components/PButton';
 import { COLORS } from 'common/constants';
+import { useDispatch } from 'react-redux';
+import { addToCart } from 'redux/actions/shopActions';
 
 const ProductCard = ({
   item: { title, imageUrl, price },
@@ -17,6 +19,9 @@ const ProductCard = ({
   onSelect,
   renderButtons,
 }) => {
+  const dispatch = useDispatch();
+
+  const handleAddToCart = (productId) => dispatch(addToCart(productId));
   return (
     <Card style={styles.project}>
       <TouchableOpacity style={styles.link} onPress={onSelect}>
@@ -38,7 +43,10 @@ const ProductCard = ({
                   <PButton key="onselect" onPress={onSelect} isOutlined>
                     View detail
                   </PButton>,
-                  <PButton key="onadd" isPrimary>
+                  <PButton
+                    key="onadd"
+                    isPrimary
+                    onPress={handleAddToCart.bind(this, item.id)}>
                     Add to cart
                   </PButton>,
                 ]}

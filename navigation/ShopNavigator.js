@@ -17,6 +17,8 @@ const AdminShopStack = createStackNavigator();
 const OrdersShopStack = createStackNavigator();
 
 import SCREENS from 'navigation/Screens';
+import { COLORS } from 'common/constants';
+import { useSelector } from 'react-redux';
 
 const renderMenu = ({ navigation }) => ({
   headerLeft: function addMenuBtn(params) {
@@ -87,8 +89,43 @@ const ShopAdminStack = [
   },
 ];
 
+const defaultProductScreenOptions = (nav) => ({
+  headerStyle: {
+    backgroundColor: COLORS.primary,
+  },
+  headerTitleStyle: {
+    fontFamily: 'open-sans-bold',
+  },
+  headerBackTitleStyle: {
+    fontFamily: 'open-sans',
+  },
+  headerTintColor: COLORS.accent,
+  headerRight: function addToFavorite(props) {
+    const hasCartItems = useSelector(
+      (state) => Object.keys(state.shop.cart.items).length,
+    );
+    if (!hasCartItems) {
+      return null;
+    }
+    return (
+      <TouchableOpacity
+        onPress={() => {
+          nav.navigation.navigate(SCREENS.ShopCart);
+        }}>
+        <IonIcons
+          style={{ marginRight: 10 }}
+          color={props.tintColor}
+          name={'cart'}
+        />
+      </TouchableOpacity>
+    );
+  },
+});
+
 const ShopProductsNavigator = () => (
-  <ShopStack.Navigator initialRouteName={SCREENS.ShopProductsList}>
+  <ShopStack.Navigator
+    initialRouteName={SCREENS.ShopProductsList}
+    screenOptions={defaultProductScreenOptions}>
     {ShopProducts.map((row) => (
       <ShopStack.Screen key={row.name} {...row} />
     ))}

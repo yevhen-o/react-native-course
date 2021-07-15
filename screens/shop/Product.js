@@ -6,6 +6,8 @@ import Card from 'components/Card';
 import PText from 'components/PText';
 import PButton from 'components/PButton';
 import PageWrapper from 'components/PageWrapper';
+import { useDispatch } from 'react-redux';
+import { addToCart } from 'redux/actions/shopActions';
 
 const Product = ({ navigation, route }) => {
   useLayoutEffect(() => {
@@ -14,7 +16,11 @@ const Product = ({ navigation, route }) => {
     });
   }, [navigation, route]);
 
-  const { imageUrl, price, description } = route.params.item;
+  const { imageUrl, price, description, id } = route.params.item;
+
+  const dispatch = useDispatch();
+
+  const handleAddToCart = () => dispatch(addToCart(id));
 
   return (
     <PageWrapper>
@@ -25,7 +31,9 @@ const Product = ({ navigation, route }) => {
         <PText>Price:</PText>
         <PText isBold>{price}</PText>
       </View>
-      <PButton isFullWidth>Add To Cart</PButton>
+      <PButton isFullWidth onPress={handleAddToCart}>
+        Add To Cart
+      </PButton>
 
       <PText style={styles.description} isH4>
         Description

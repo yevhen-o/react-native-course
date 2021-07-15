@@ -17,3 +17,13 @@ export const setSectionRejected = (section, ...args) => ({
   payload: { ...args },
   section,
 });
+
+export const addToCart = (productId) => ({
+  type: AT.SHOP_ADD_TO_CART,
+  payload: { productId },
+});
+
+export const removeFromCart = (productId) => ({
+  type: AT.SHOP_REMOVE_FROM_CART,
+  payload: { productId },
+});
