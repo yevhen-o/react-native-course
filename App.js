@@ -3,14 +3,20 @@ import AppLoading from 'expo-app-loading';
 import * as Font from 'expo-font';
 import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
 import MainNavigator from 'navigation/MainNavigator';
 import { mealsReducer } from 'redux/reducers/mealsReducer';
+import { appReducer } from 'redux/reducers/appReducer';
+import { shopReducer } from 'redux/reducers/shopReducer';
 
 const store = createStore(
   combineReducers({
     meals: mealsReducer,
+    app: appReducer,
+    shop: shopReducer,
   }),
+  composeWithDevTools(),
 );
 
 const fetchFonts = () => {
