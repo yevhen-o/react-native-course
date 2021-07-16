@@ -8,9 +8,32 @@ import PageWrapper from 'components/PageWrapper';
 const AddEditProject = ({ navigation, route }) => {
   useLayoutEffect(() => {
     navigation.setOptions({
-      title: 'Edit -> ' + route.params.item.title + '!',
+      title: (route.params || {}).item
+        ? `Edit -> ${route.params.item.title} !`
+        : 'Add new product',
     });
   }, [navigation, route]);
+
+  const RULES = {
+    imageUrl: {
+      isRequired: true,
+      isUrl: true,
+    },
+    title: {
+      isRequired: true,
+      minLength: 3,
+      maxLength: 80,
+    },
+    description: {
+      isRequired: true,
+      minLength: 100,
+      maxLength: 256,
+    },
+    price: {
+      isRequired: true,
+      numbersWithDecimalOnly: true,
+    },
+  };
 
   const [formFields] = useState([
     {
@@ -31,7 +54,9 @@ const AddEditProject = ({ navigation, route }) => {
     },
   ]);
 
-  const [values, setValues] = useState({ ...(route.params.item || {}) });
+  const [values, setValues] = useState({
+    ...((route.params || {}).item || {}),
+  });
 
   const handleInputChange = (key, newValue) => {
     setValues((values) => ({ ...values, [key]: newValue }));
@@ -41,9 +66,11 @@ const AddEditProject = ({ navigation, route }) => {
     <PageWrapper>
       {formFields.map(({ key, label }) => (
         <TextInput
-          value={values[key].toString()}
+          rules={RULES}
+          values={values}
           onChange={handleInputChange.bind(this, key)}
           key={key}
+          fieldKey={key}
           label={label}
           style={styles.input}
         />

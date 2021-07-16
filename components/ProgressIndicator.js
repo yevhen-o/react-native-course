@@ -8,7 +8,6 @@ export const ProgressIndicator = () => {
       style={{
         flex: 1,
         padding: 50,
-        borderWidth: 1,
         alignItems: 'center',
         justifyContent: 'space-around',
       }}>

@@ -1,33 +1,46 @@
-import { COLORS } from 'common/constants';
 import React, { useState } from 'react';
 import { StyleSheet, View, TextInput } from 'react-native';
-import FieldHelpText from './FieldHelpText';
 
 import FieldLabel from './FieldLabel';
+import { COLORS } from 'common/constants';
+import FieldHelpText from './FieldHelpText';
+import { checkValidity } from 'common/validationHelper';
 
 const InputField = ({
-  onChange,
-  value,
-  placeholder,
   label,
+  value,
+  rules,
+  values,
+  fieldKey,
+  onChange,
   helpText,
-  errorText,
-  hasError,
+  placeholder,
   ...restProps
 }) => {
-  const [inputValue, setValue] = useState(value || '');
-  const [isFocused, setIsFocused] = useState(false);
+  const [inputValue, setValue] = useState(value || values[fieldKey] || '');
+  const [fieldState, setFieldState] = useState({
+    isFocused: false,
+    isTouched: false,
+    errorMessage: '',
+    isValid: true,
+  });
+
+  const { isFocused, isTouched, errorMessage, isValid } = fieldState;
 
   const onInputChange = (text) => {
     if (onChange && typeof onChange === 'function') {
       onChange(text);
-    } else {
-      setValue(text);
     }
+    const { isValid, errorMessage } = checkValidity(text, rules[fieldKey]);
+    setFieldState((state) => ({ ...state, isValid, errorMessage }));
+    setValue(text);
   };
 
   const handleFocus = (isFocused) => () => {
-    setIsFocused(isFocused);
+    setFieldState((state) => ({ ...state, isFocused }));
+    if (!isTouched && !isFocused) {
+      setFieldState((state) => ({ ...state, isTouched: true }));
+    }
   };
 
   const styles = StyleSheet.create({
@@ -38,7 +51,7 @@ const InputField = ({
       position: 'relative',
     },
     input: {
-      borderBottomColor: hasError ? COLORS.error : COLORS.primary,
+      borderBottomColor: !isValid && isTouched ? COLORS.error : COLORS.primary,
       borderBottomWidth: 2,
       fontSize: 16,
     },
@@ -51,7 +64,7 @@ const InputField = ({
     <View style={styles.container}>
       <FieldLabel
         isFloating
-        hasError={hasError}
+        hasError={!isValid && isTouched}
         isFloated={isFocused || !!value || !!inputValue || !!placeholder}>
         {label}
       </FieldLabel>
@@ -61,12 +74,12 @@ const InputField = ({
         onBlur={handleFocus(false)}
         placeholder={placeholder}
         onChangeText={onInputChange}
-        value={value || inputValue}
+        value={inputValue}
         style={[styles.input, isFocused ? styles.isFocused : '']}
       />
-      {helpText && !hasError && <FieldHelpText>{helpText}</FieldHelpText>}
-      {hasError && errorText && (
-        <FieldHelpText hasError>{errorText}</FieldHelpText>
+      {helpText && isValid && <FieldHelpText>{helpText}</FieldHelpText>}
+      {!isValid && errorMessage && isTouched && (
+        <FieldHelpText hasError>{errorMessage}</FieldHelpText>
       )}
     </View>
   );

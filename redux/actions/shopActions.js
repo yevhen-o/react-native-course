@@ -2,9 +2,10 @@ import { AT } from 'redux/ActionsTypes';
 import {
   actionFactory,
   getProductsFn,
-  getUserProductsFn,
   getUserOrdersFn,
   userPlaceOrderFn,
+  getUserProductsFn,
+  userRemoveProductFn,
 } from 'Api/Api';
 
 export const setSectionFetching = (section, ...args) => ({
@@ -40,6 +41,11 @@ export const shopPlaceOrder = (section, data) => ({
   payload: { order: data },
 });
 
+export const shopRemoveProduct = (section, data) => ({
+  type: AT.SHOP_REMOVE_PRODUCT,
+  payload: data,
+});
+
 export const getProducts = actionFactory(
   getProductsFn,
   setSectionFetching,
@@ -70,4 +76,12 @@ export const userPlaceOrder = actionFactory(
   [setSectionFetched, shopPlaceOrder],
   setSectionRejected,
   'userPlaceOrder',
+);
+
+export const userRemoveProduct = actionFactory(
+  userRemoveProductFn,
+  setSectionFetching,
+  [setSectionFetched, shopRemoveProduct],
+  setSectionRejected,
+  'userRemoveProduct',
 );

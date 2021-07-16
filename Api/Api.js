@@ -146,3 +146,11 @@ export const userPlaceOrderFn = (order) => {
     }, 2000);
   });
 };
+
+export const userRemoveProductFn = (productId) => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(productId);
+    }, 2000);
+  });
+};

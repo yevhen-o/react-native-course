@@ -26,6 +26,12 @@ const initialState = {
   userPlaceOrder: {
     ...defaultSectionState,
   },
+  userRemoveOrder: {
+    ...defaultSectionState,
+  },
+  userRemoveProduct: {
+    ...defaultSectionState,
+  },
 };
 
 export const shopReducer = (state = initialState, action) => {
@@ -80,7 +86,6 @@ export const shopReducer = (state = initialState, action) => {
       };
     }
     case AT.SHOP_PLACE_ORDER: {
-      console.log('payload', payload.order);
       return {
         ...state,
         userOrdersState: {
@@ -99,6 +104,27 @@ export const shopReducer = (state = initialState, action) => {
           items: {},
           total: 0,
         },
+      };
+    }
+    case AT.SHOP_REMOVE_PRODUCT: {
+      const userProductsState = { ...state.userOrdersState };
+      const productsState = { ...state.productsState };
+      const cart = { ...state.cart };
+      if (userProductsState[payload.productId]) {
+        delete userProductsState[payload.productId];
+      }
+      if (productsState[payload.productId]) {
+        delete productsState[payload.productId];
+      }
+      if (cart.items[payload.productId]) {
+        cart.total = cart.total - cart.items[payload.productId].sum;
+        delete cart.items[payload.productId];
+      }
+      return {
+        ...state,
+        cart,
+        productsState,
+        userProductsState,
       };
     }
     default:
