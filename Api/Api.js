@@ -1,10 +1,5 @@
 import { PRODUCTS } from 'data/dummyData';
 import { showToast } from 'redux/actions/appActions';
-import {
-  setSectionFetched,
-  setSectionFetching,
-  setSectionRejected,
-} from 'redux/actions/shopActions';
 
 export const STATUS = {
   NOT_FOUND: 404,
@@ -84,7 +79,7 @@ export const actionFactory =
       });
   };
 
-const getUserProductsFn = (userId) =>
+export const getUserProductsFn = (userId) =>
   new Promise((resolve) => {
     setTimeout(
       () =>
@@ -98,7 +93,7 @@ const getUserProductsFn = (userId) =>
     );
   });
 
-const getProductsFn = () =>
+export const getProductsFn = () =>
   new Promise((resolve) => {
     setTimeout(() => {
       resolve(
@@ -110,18 +105,44 @@ const getProductsFn = () =>
     }, 2000);
   });
 
-export const getProducts = actionFactory(
-  getProductsFn,
-  setSectionFetching,
-  setSectionFetched,
-  setSectionRejected,
-  'productsState',
-);
+export const getUserOrdersFn = () =>
+  new Promise((resolve) => {
+    setTimeout(() => {
+      resolve({
+        adfasdfasdfadsfasdf: {
+          id: 'adfasdfasdfadsfasdf',
+          date: Date.now(),
+          totalAmount: 298.94,
+          items: {
+            p1: {
+              quantity: 3,
+              productPrice: 29.99,
+              productTitle: 'Red Shirt',
+              sum: 89.97,
+            },
+            p2: {
+              quantity: 2,
+              productPrice: 99.99,
+              productTitle: 'Blue Carpet',
+              sum: 199.98,
+            },
+            p3: {
+              quantity: 1,
+              productPrice: 8.99,
+              productTitle: 'Coffee Mug',
+              sum: 8.99,
+            },
+          },
+        },
+      });
+    }, 2000);
+  });
 
-export const getUserProducts = actionFactory(
-  getUserProductsFn,
-  setSectionFetching,
-  setSectionFetched,
-  setSectionRejected,
-  'userProductsState',
-);
+export const userPlaceOrderFn = (order) => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      order.id = Math.random().toString().replace('0.', '');
+      resolve(order);
+    }, 2000);
+  });
+};

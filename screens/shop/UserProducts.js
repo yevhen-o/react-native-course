@@ -6,7 +6,7 @@ import PageWrapper from 'components/PageWrapper';
 import PText from 'components/PText';
 import PButton from 'components/PButton';
 import ProductList from 'components/ProductList';
-import { getUserProducts } from 'Api/Api';
+import { getUserProducts } from 'redux/actions/shopActions';
 
 import SCREENS from 'navigation/Screens';
 

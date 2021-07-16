@@ -12,9 +12,11 @@ const ErrorText = ({ message, children, isFiltered, image, title }) => {
       />
       {title && <PText isH3>{title}</PText>}
       <PText>
-        {message || children || isFiltered
-          ? 'No data match your criteria'
-          : 'Nothing to display, try add data first'}
+        {message ||
+          children ||
+          (isFiltered
+            ? 'No data match your criteria'
+            : 'Nothing to display, try add data first')}
       </PText>
     </View>
   );

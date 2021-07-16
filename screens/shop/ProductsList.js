@@ -6,7 +6,7 @@ import PageWrapper from 'components/PageWrapper';
 import ProductList from 'components/ProductList';
 import PText from 'components/PText';
 
-import { getProducts } from 'Api/Api';
+import { getProducts } from 'redux/actions/shopActions';
 
 const ProductsList = ({ navigation }) => {
   const dispatch = useDispatch();

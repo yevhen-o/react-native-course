@@ -7,6 +7,7 @@ import {
 } from './helpers';
 
 import CartItem from 'models/cartItem';
+import Order from 'models/order';
 
 const initialState = {
   productsState: {
@@ -18,6 +19,12 @@ const initialState = {
   cart: {
     items: {},
     total: 0,
+  },
+  userOrdersState: {
+    ...defaultSectionState,
+  },
+  userPlaceOrder: {
+    ...defaultSectionState,
   },
 };
 
@@ -69,6 +76,28 @@ export const shopReducer = (state = initialState, action) => {
           ...state.cart,
           items: cartItems,
           total: state.cart.total - product.price,
+        },
+      };
+    }
+    case AT.SHOP_PLACE_ORDER: {
+      console.log('payload', payload.order);
+      return {
+        ...state,
+        userOrdersState: {
+          ...state.userOrdersState,
+          data: {
+            ...state.userOrdersState.data,
+            [payload.order.id]: new Order(
+              payload.order.id,
+              payload.order.items,
+              payload.order.total,
+              Date.now(),
+            ),
+          },
+        },
+        cart: {
+          items: {},
+          total: 0,
         },
       };
     }

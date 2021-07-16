@@ -1,15 +1,32 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { ScrollView, StyleSheet, View } from 'react-native';
 
 import Card from 'components/Card';
 import PText from 'components/PText';
 import PButton from 'components/PButton';
-import PageWrapper from 'components/PageWrapper';
 import CartItem from 'components/CartItem';
+import PageWrapper from 'components/PageWrapper';
+import NothingToDisplay from 'components/NothingToDisplay';
+import { userPlaceOrder } from 'redux/actions/shopActions';
+import { ProgressIndicator } from 'components/ProgressIndicator';
 
 const Cart = () => {
+  const dispatch = useDispatch();
   const { total, items } = useSelector((state) => state.shop.cart);
+  const { isFetching: isOrderPlacing } = useSelector(
+    (state) => state.shop.userPlaceOrder,
+  );
+
+  const handlePlaceOrder = () => {
+    userPlaceOrder({ total, items })(dispatch);
+  };
+  if (!Object.keys(items).length) {
+    return <NothingToDisplay message="Your cart is empty" />;
+  }
+  if (isOrderPlacing) {
+    return <ProgressIndicator />;
+  }
   return (
     <PageWrapper>
       <ScrollView>
@@ -20,7 +37,9 @@ const Cart = () => {
               <PText isBold>${total.toFixed(2)}</PText>
             </View>
             <View>
-              <PButton isFullWidth>Place order</PButton>
+              <PButton onPress={handlePlaceOrder} isFullWidth>
+                Place order
+              </PButton>
             </View>
           </View>
         </Card>

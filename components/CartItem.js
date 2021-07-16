@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import { removeFromCart } from 'redux/actions/shopActions';
 
 const CartItem = (props) => {
+  const isRemoveShown = props.isRemoveShown;
   const { productTitle, quantity, sum, productPrice } = props.item;
   const dispatch = useDispatch();
 
@@ -26,7 +27,9 @@ const CartItem = (props) => {
         </View>
       </View>
       <PText isBold>{sum}</PText>
-      <PButton isSecondary icon="trash" onPress={handleRemoveProduct} />
+      {isRemoveShown !== false && (
+        <PButton isSecondary icon="trash" onPress={handleRemoveProduct} />
+      )}
     </View>
   );
 };
