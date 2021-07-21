@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, TextInput } from 'react-native';
 
 import FieldLabel from './FieldLabel';
@@ -15,23 +15,37 @@ const InputField = ({
   onChange,
   helpText,
   placeholder,
+  formErrors = {},
+  isTouched: initialTouched,
   ...restProps
 }) => {
   const [inputValue, setValue] = useState(value || values[fieldKey] || '');
   const [fieldState, setFieldState] = useState({
     isFocused: false,
-    isTouched: false,
-    errorMessage: '',
-    isValid: true,
+    isTouched: restProps.isTouched,
+    errorMessage: formErrors[fieldKey],
+    isValid: !formErrors[fieldKey],
   });
+
+  useEffect(() => {
+    setFieldState((fieldState) => ({
+      ...fieldState,
+      isTouched: fieldState.isTouched || initialTouched,
+      errorMessage: formErrors[fieldKey],
+      isValid: !formErrors[fieldKey],
+    }));
+  }, [initialTouched, formErrors]);
 
   const { isFocused, isTouched, errorMessage, isValid } = fieldState;
 
   const onInputChange = (text) => {
-    if (onChange && typeof onChange === 'function') {
-      onChange(text);
-    }
     const { isValid, errorMessage } = checkValidity(text, rules[fieldKey]);
+
+    if (onChange && typeof onChange === 'function') {
+      onChange(text, {
+        formErrors: { ...formErrors, [fieldKey]: errorMessage },
+      });
+    }
     setFieldState((state) => ({ ...state, isValid, errorMessage }));
     setValue(text);
   };
@@ -74,7 +88,7 @@ const InputField = ({
         onBlur={handleFocus(false)}
         placeholder={placeholder}
         onChangeText={onInputChange}
-        value={inputValue}
+        value={inputValue.toString()}
         style={[styles.input, isFocused ? styles.isFocused : '']}
       />
       {helpText && isValid && <FieldHelpText>{helpText}</FieldHelpText>}

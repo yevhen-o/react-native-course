@@ -1,5 +1,9 @@
-import { PRODUCTS } from 'data/dummyData';
+import axios from 'axios';
 import { showToast } from 'redux/actions/appActions';
+
+const httpClient = axios.create({
+  baseURL: 'https://react-native-course-99e2c-default-rtdb.firebaseio.com/',
+});
 
 export const STATUS = {
   NOT_FOUND: 404,
@@ -65,13 +69,17 @@ export const actionFactory =
         return data;
       })
       .catch((err) => {
-        console.log(err);
-        if (err !== `CANCELED_REQUEST` && actionRejected) {
-          [
-            ...(Array.isArray(actionRejected)
-              ? actionRejected
-              : [actionRejected]),
-          ].forEach((action) => dispatch(action(err, section, ...args)));
+        console.log('err -----> ', err, err.request);
+        try {
+          if (err !== `CANCELED_REQUEST` && actionRejected) {
+            [
+              ...(Array.isArray(actionRejected)
+                ? actionRejected
+                : [actionRejected]),
+            ].forEach((action) => dispatch(action(section, err, ...args)));
+          }
+        } catch (e) {
+          console.log(e);
         }
         if (err.config && err.config.throwError) {
           throw err;
@@ -79,78 +87,41 @@ export const actionFactory =
       });
   };
 
-export const getUserProductsFn = (userId) =>
-  new Promise((resolve) => {
-    setTimeout(
-      () =>
-        resolve(
-          PRODUCTS.filter(({ ownerId }) => ownerId === userId).reduce(
-            (acc, { id, ...rest }) => ({ ...acc, [id]: { ...rest, id } }),
-            {},
-          ),
-        ),
-      2000,
-    );
-  });
+export const retrieveData = (response) => response.data;
+
+export const moveObjectKeyIntoIdField = (object) =>
+  Object.keys(object || {}).reduce(
+    (acc, key) => ({ ...acc, [key]: { ...object[key], id: key } }),
+    {},
+  );
+
+export const getUserProductsFn = () =>
+  httpClient
+    .get('products.json')
+    .then(retrieveData)
+    .then(moveObjectKeyIntoIdField);
 
 export const getProductsFn = () =>
-  new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(
-        PRODUCTS.reduce(
-          (acc, { id, ...rest }) => ({ ...acc, [id]: { ...rest, id } }),
-          {},
-        ),
-      );
-    }, 2000);
-  });
+  httpClient
+    .get('products.json')
+    .then(retrieveData)
+    .then(moveObjectKeyIntoIdField);
 
 export const getUserOrdersFn = () =>
-  new Promise((resolve) => {
-    setTimeout(() => {
-      resolve({
-        adfasdfasdfadsfasdf: {
-          id: 'adfasdfasdfadsfasdf',
-          date: Date.now(),
-          totalAmount: 298.94,
-          items: {
-            p1: {
-              quantity: 3,
-              productPrice: 29.99,
-              productTitle: 'Red Shirt',
-              sum: 89.97,
-            },
-            p2: {
-              quantity: 2,
-              productPrice: 99.99,
-              productTitle: 'Blue Carpet',
-              sum: 199.98,
-            },
-            p3: {
-              quantity: 1,
-              productPrice: 8.99,
-              productTitle: 'Coffee Mug',
-              sum: 8.99,
-            },
-          },
-        },
-      });
-    }, 2000);
-  });
+  httpClient
+    .get('orders.json')
+    .then(retrieveData)
+    .then(moveObjectKeyIntoIdField);
 
-export const userPlaceOrderFn = (order) => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      order.id = Math.random().toString().replace('0.', '');
-      resolve(order);
-    }, 2000);
-  });
-};
+export const userPlaceOrderFn = (order) =>
+  httpClient.post('/orders.json', order).then(retrieveData);
 
-export const userRemoveProductFn = (productId) => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(productId);
-    }, 2000);
-  });
+export const userRemoveProductFn = ({ productId }) =>
+  httpClient.delete(`/products/${productId}.json`);
+
+export const userAddEditProductFn = (product) => {
+  if (!product.id) {
+    return httpClient.post('/products.json', product).then(retrieveData);
+  }
+  return httpClient.patch(`/products/${product.id}.json`, product);
 };

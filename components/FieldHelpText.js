@@ -12,7 +12,7 @@ const FieldHelpText = ({ children, hasError }) => {
   const styles = StyleSheet.create({
     text: {
       color: hasError ? COLORS.error : COLORS.disabled,
-      fontSize: 14,
+      fontSize: 13,
       marginTop: 2,
     },
   });

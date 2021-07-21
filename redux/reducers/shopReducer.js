@@ -32,6 +32,9 @@ const initialState = {
   userRemoveProduct: {
     ...defaultSectionState,
   },
+  userAddEditProductState: {
+    ...defaultSectionState,
+  },
 };
 
 export const shopReducer = (state = initialState, action) => {
@@ -53,13 +56,13 @@ export const shopReducer = (state = initialState, action) => {
             ...state.cart.items,
             [payload.productId]: new CartItem(
               ((state.cart.items[payload.productId] || {}).quantity || 0) + 1,
-              product.price,
+              +product.price,
               product.title,
               ((state.cart.items[payload.productId] || {}).sum || 0) +
-                product.price,
+                +product.price,
             ),
           },
-          total: state.cart.total + product.price,
+          total: +state.cart.total + +product.price,
         },
       };
     }
@@ -71,9 +74,9 @@ export const shopReducer = (state = initialState, action) => {
       } else {
         cartItems[payload.productId] = new CartItem(
           ((cartItems[payload.productId] || {}).quantity || 0) - 1,
-          product.price,
+          +product.price,
           product.title,
-          ((cartItems[payload.productId] || {}).sum || 0) - product.price,
+          ((cartItems[payload.productId] || {}).sum || 0) - +product.price,
         );
       }
       return {
@@ -81,7 +84,7 @@ export const shopReducer = (state = initialState, action) => {
         cart: {
           ...state.cart,
           items: cartItems,
-          total: state.cart.total - product.price,
+          total: +state.cart.total - +product.price,
         },
       };
     }
@@ -95,8 +98,8 @@ export const shopReducer = (state = initialState, action) => {
             [payload.order.id]: new Order(
               payload.order.id,
               payload.order.items,
-              payload.order.total,
-              Date.now(),
+              payload.order.totalAmount,
+              payload.order.date,
             ),
           },
         },
@@ -107,17 +110,23 @@ export const shopReducer = (state = initialState, action) => {
       };
     }
     case AT.SHOP_REMOVE_PRODUCT: {
-      const userProductsState = { ...state.userOrdersState };
-      const productsState = { ...state.productsState };
+      const userProductsState = {
+        ...state.userProductsState,
+        data: { ...state.userProductsState.data },
+      };
+      const productsState = {
+        ...state.productsState,
+        data: { ...state.productsState.data },
+      };
       const cart = { ...state.cart };
-      if (userProductsState[payload.productId]) {
-        delete userProductsState[payload.productId];
+      if (userProductsState.data[payload.productId]) {
+        delete userProductsState.data[payload.productId];
       }
-      if (productsState[payload.productId]) {
-        delete productsState[payload.productId];
+      if (productsState.data[payload.productId]) {
+        delete productsState.data[payload.productId];
       }
       if (cart.items[payload.productId]) {
-        cart.total = cart.total - cart.items[payload.productId].sum;
+        cart.total = +cart.total - +cart.items[payload.productId].sum;
         delete cart.items[payload.productId];
       }
       return {
@@ -125,6 +134,25 @@ export const shopReducer = (state = initialState, action) => {
         cart,
         productsState,
         userProductsState,
+      };
+    }
+    case AT.SHOP_ADD_EDIT_PRODUCT: {
+      return {
+        ...state,
+        userProductsState: {
+          ...state.userProductsState,
+          data: {
+            ...state.userProductsState.data,
+            [payload.id]: payload,
+          },
+        },
+        productsState: {
+          ...state.productsState,
+          data: {
+            ...state.productsState.data,
+            [payload.id]: payload,
+          },
+        },
       };
     }
     default:

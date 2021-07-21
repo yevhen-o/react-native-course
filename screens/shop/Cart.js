@@ -19,7 +19,13 @@ const Cart = () => {
   );
 
   const handlePlaceOrder = () => {
-    userPlaceOrder({ total, items })(dispatch);
+    dispatch(
+      userPlaceOrder({
+        totalAmount: total,
+        items,
+        date: new Date().toISOString(),
+      }),
+    );
   };
   if (!Object.keys(items).length) {
     return <NothingToDisplay message="Your cart is empty" />;

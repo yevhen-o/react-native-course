@@ -1,9 +1,10 @@
+import * as Font from 'expo-font';
+import ReduxThunk from 'redux-thunk';
+import { Provider } from 'react-redux';
 import React, { useState } from 'react';
 import AppLoading from 'expo-app-loading';
-import * as Font from 'expo-font';
-import { createStore, combineReducers } from 'redux';
-import { Provider } from 'react-redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
 
 import MainNavigator from 'navigation/MainNavigator';
 import { mealsReducer } from 'redux/reducers/mealsReducer';
@@ -16,7 +17,7 @@ const store = createStore(
     app: appReducer,
     shop: shopReducer,
   }),
-  composeWithDevTools(),
+  composeWithDevTools(applyMiddleware(ReduxThunk)),
 );
 
 const fetchFonts = () => {

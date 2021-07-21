@@ -18,7 +18,9 @@ const OrderCard = ({ order }) => {
             <View style={{ flex: 1 }}>
               <View style={styles.row}>
                 <PText>{moment(date).format('MMMM Do YYYY, hh:mm')}</PText>
-                {!isVisible && <PText isBold>${totalAmount}</PText>}
+                {!isVisible && (
+                  <PText isBold>${(totalAmount || 0).toFixed(2)}</PText>
+                )}
               </View>
               {isVisible && (
                 <View style={{ flex: 1, marginTop: 20 }}>
@@ -38,7 +40,8 @@ const OrderCard = ({ order }) => {
                       paddingVertical: 4,
                       borderTopWidth: 1,
                     }}>
-                    TOTAL: <PText isBold>${totalAmount}</PText>
+                    TOTAL:{' '}
+                    <PText isBold>${(totalAmount || 0).toFixed(2)}</PText>
                   </PText>
                 </View>
               )}

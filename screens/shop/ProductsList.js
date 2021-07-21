@@ -12,7 +12,7 @@ const ProductsList = ({ navigation }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    getProducts()(dispatch);
+    dispatch(getProducts());
   }, []);
 
   const productsState = useSelector((state) => state.shop.productsState);

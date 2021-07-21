@@ -6,6 +6,7 @@ import {
   userPlaceOrderFn,
   getUserProductsFn,
   userRemoveProductFn,
+  userAddEditProductFn,
 } from 'Api/Api';
 
 export const setSectionFetching = (section, ...args) => ({
@@ -36,14 +37,19 @@ export const removeFromCart = (productId) => ({
   payload: { productId },
 });
 
-export const shopPlaceOrder = (section, data) => ({
+export const shopPlaceOrder = (section, data, payload) => ({
   type: AT.SHOP_PLACE_ORDER,
-  payload: { order: data },
+  payload: { order: { ...payload, id: data.name } },
 });
 
-export const shopRemoveProduct = (section, data) => ({
+export const shopRemoveProduct = (section, data, payload) => ({
   type: AT.SHOP_REMOVE_PRODUCT,
-  payload: data,
+  payload,
+});
+
+export const shopAddEditProduct = (section, data, payload) => ({
+  type: AT.SHOP_ADD_EDIT_PRODUCT,
+  payload: { id: data.name, ...payload },
 });
 
 export const getProducts = actionFactory(
@@ -84,4 +90,12 @@ export const userRemoveProduct = actionFactory(
   [setSectionFetched, shopRemoveProduct],
   setSectionRejected,
   'userRemoveProduct',
+);
+
+export const userAddEditProduct = actionFactory(
+  userAddEditProductFn,
+  setSectionFetching,
+  [setSectionFetched, shopAddEditProduct],
+  setSectionRejected,
+  'userAddEditProductState',
 );
