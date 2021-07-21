@@ -18,8 +18,12 @@ const UserProducts = ({ navigation, route }) => {
     navigation.navigate(SCREENS.ShopEditProduct, { item });
   };
 
+  const loadProducts = () => {
+    dispatch(getUserProducts('u2'));
+  };
+
   useEffect(() => {
-    getUserProducts('u2')(dispatch);
+    loadProducts();
   }, []);
 
   useLayoutEffect(() => {
@@ -49,7 +53,11 @@ const UserProducts = ({ navigation, route }) => {
     userRemoveProduct({ productId: item.id })(dispatch);
   };
 
-  if (isRemoveProgress || userProductsState.isFetching) {
+  if (
+    isRemoveProgress ||
+    (userProductsState.isFetching &&
+      !Object.keys(userProductsState.data).length)
+  ) {
     return <ProgressIndicator />;
   }
 
@@ -63,9 +71,11 @@ const UserProducts = ({ navigation, route }) => {
   }
 
   return (
-    <PageWrapper>
-      {userProductsState.isFetched && (
+    <PageWrapper isWithoutScrollView>
+      {!!Object.keys(userProductsState.data).length && (
         <ProductList
+          onRefresh={loadProducts}
+          isFetching={userProductsState.isFetching}
           data={Object.values(userProductsState.data)}
           navigation={navigation}
           renderButtons={(item) => [

@@ -4,7 +4,13 @@ import { FlatList } from 'react-native';
 import ProductCard from 'components/ProductCard';
 import SCREENS from 'navigation/Screens';
 
-const ProductList = ({ navigation, data, renderButtons }) => {
+const ProductList = ({
+  navigation,
+  data,
+  renderButtons,
+  onRefresh,
+  isFetching,
+}) => {
   const renderItem = ({ item }) => {
     return (
       <ProductCard
@@ -22,6 +28,8 @@ const ProductList = ({ navigation, data, renderButtons }) => {
 
   return (
     <FlatList
+      onRefresh={onRefresh}
+      refreshing={isFetching}
       data={data}
       numColumns={1}
       renderItem={renderItem}

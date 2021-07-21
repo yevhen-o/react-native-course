@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
-import { View } from 'react-native';
+import { FlatList } from 'react-native';
 
-import PText from 'components/PText';
 import OrderCard from 'components/OrderCard';
 import PageWrapper from 'components/PageWrapper';
 import { useDispatch, useSelector } from 'react-redux';
@@ -11,8 +10,12 @@ import ProgressIndicator from 'components/ProgressIndicator';
 
 const Orders = () => {
   const dispatch = useDispatch();
+
+  const loadOrders = () => {
+    dispatch(getUserOrders());
+  };
   useEffect(() => {
-    getUserOrders()(dispatch);
+    loadOrders();
   }, []);
 
   const userOrdersState = useSelector((state) => state.shop.userOrdersState);
@@ -25,15 +28,23 @@ const Orders = () => {
     return <NothingToDisplay message="Looks you don't have any order yet" />;
   }
 
+  const renderItem = ({ item }) => {
+    return <OrderCard key={item.id} order={item} />;
+  };
+
   return (
-    <PageWrapper>
-      {userOrdersState.isFetching && <PText>Loading ...</PText>}
-      {userOrdersState.isFetched && (
-        <View style={{ flex: 1 }}>
-          {Object.values(userOrdersState.data).map((order) => (
-            <OrderCard key={order.id} order={order} />
-          ))}
-        </View>
+    <PageWrapper isWithoutScrollView>
+      {userOrdersState.isFetching &&
+        !Object.keys(userOrdersState.data).length && <ProgressIndicator />}
+      {!!Object.keys(userOrdersState.data).length && (
+        <FlatList
+          onRefresh={loadOrders}
+          refreshing={userOrdersState.isFetching}
+          data={Object.values(userOrdersState.data)}
+          renderItem={renderItem}
+          numColumns={1}
+          keyExtractor={(item) => item.id}
+        />
       )}
     </PageWrapper>
   );

@@ -23,7 +23,7 @@ const GameScreen = (props) => {
       <BodyText>Загадай число від 1 до 99</BodyText>
       <View style={{ width: 300 }}>
         <TextInput
-          label={'Число'}
+          label={'Number'}
           onChange={handleChange}
           value={number}
           keyboardType={'number-pad'}

@@ -5,6 +5,8 @@ import React, { useState } from 'react';
 import AppLoading from 'expo-app-loading';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { LogBox } from 'react-native';
+LogBox.ignoreLogs(['Reanimated 2']);
 
 import MainNavigator from 'navigation/MainNavigator';
 import { mealsReducer } from 'redux/reducers/mealsReducer';

@@ -6,16 +6,18 @@ import { COLORS } from 'common/constants';
 import FieldHelpText from './FieldHelpText';
 import { checkValidity } from 'common/validationHelper';
 
+const defaultObj = {};
+
 const InputField = ({
   label,
   value,
-  rules,
-  values,
-  fieldKey,
+  rules = defaultObj,
+  values = defaultObj,
+  fieldKey = '',
   onChange,
   helpText,
   placeholder,
-  formErrors = {},
+  formErrors = defaultObj,
   isTouched: initialTouched,
   ...restProps
 }) => {
