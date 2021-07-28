@@ -121,7 +121,7 @@ export const getProductsFn = () =>
 
 export const getUserOrdersFn = () =>
   httpClient
-    .get(`orders/${getUserId()}.json`)
+    .get('orders.json')
     .then(retrieveData)
     .then(moveObjectKeyIntoIdField);
 

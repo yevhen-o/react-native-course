@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { showToast } from 'redux/actions/appActions';
-import { getUserId } from './helper';
 
 export const httpClient = axios.create({
   baseURL: 'https://react-native-course-99e2c-default-rtdb.firebaseio.com/',
@@ -121,12 +120,12 @@ export const getProductsFn = () =>
 
 export const getUserOrdersFn = () =>
   httpClient
-    .get(`orders/${getUserId()}.json`)
+    .get('orders.json')
     .then(retrieveData)
     .then(moveObjectKeyIntoIdField);
 
 export const userPlaceOrderFn = (order) =>
-  httpClient.post(`/orders/${getUserId()}.json`, order).then(retrieveData);
+  httpClient.post('/orders.json', order).then(retrieveData);
 
 export const userRemoveProductFn = ({ productId }) =>
   httpClient.delete(`/products/${productId}.json`);

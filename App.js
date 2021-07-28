@@ -13,6 +13,9 @@ import { mealsReducer } from 'redux/reducers/mealsReducer';
 import { appReducer } from 'redux/reducers/appReducer';
 import { shopReducer } from 'redux/reducers/shopReducer';
 
+import Interceptor from 'Api/interceptors';
+import { getUserId } from 'Api/helper';
+
 const store = createStore(
   combineReducers({
     meals: mealsReducer,
@@ -21,6 +24,9 @@ const store = createStore(
   }),
   composeWithDevTools(applyMiddleware(ReduxThunk)),
 );
+
+Interceptor.interceptor(store);
+getUserId({ store });
 
 const fetchFonts = () => {
   return Font.loadAsync({

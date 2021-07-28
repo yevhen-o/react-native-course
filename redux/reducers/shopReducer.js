@@ -9,6 +9,12 @@ import {
 import CartItem from 'models/cartItem';
 import Order from 'models/order';
 
+import {
+  storageKeys,
+  storageRemoveItem,
+  storageSet,
+} from 'Api/AsyncStorageHelper';
+
 const initialState = {
   productsState: {
     ...defaultSectionState,
@@ -35,6 +41,9 @@ const initialState = {
   userAddEditProductState: {
     ...defaultSectionState,
   },
+  userLoginState: {
+    ...defaultSectionState,
+  },
 };
 
 export const shopReducer = (state = initialState, action) => {
@@ -46,6 +55,25 @@ export const shopReducer = (state = initialState, action) => {
       return handleSectionFetched(state, { section, data: payload.data });
     case AT.SECTION_REJECTED:
       return handleSectionRejected(state, { section, data: payload.data });
+    case AT.SHOP_SET_USER_INFO: {
+      const newState = handleSectionFetched(state, {
+        section,
+        data: payload.data,
+      });
+      const expireTime =
+        new Date().getTime() + parseInt(payload.expires_in || 3600) * 1000;
+      newState[section].data.expirationTime = expireTime;
+      storageSet(storageKeys.userLoginState, newState.userLoginState);
+      return newState;
+    }
+    case AT.SHOP_USER_LOGOUT:
+      storageRemoveItem(storageKeys.userLoginState);
+      return {
+        ...state,
+        userLoginState: {
+          ...defaultSectionState,
+        },
+      };
     case AT.SHOP_ADD_TO_CART: {
       const product = state.productsState.data[payload.productId];
       return {

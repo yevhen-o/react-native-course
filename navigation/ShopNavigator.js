@@ -6,6 +6,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Cart from 'screens/shop/Cart';
 import Orders from 'screens/shop/Orders';
 import Product from 'screens/shop/Product';
+import AuthScreen from 'screens/shop/AuthScreen';
 import ProductsList from 'screens/shop/ProductsList';
 import UserProducts from 'screens/shop/UserProducts';
 import AddEditProduct from 'screens/shop/AddEditProduct';
@@ -15,6 +16,7 @@ import IonIcons from 'components/IonIcons';
 const ShopStack = createStackNavigator();
 const AdminShopStack = createStackNavigator();
 const OrdersShopStack = createStackNavigator();
+const LoginShopStack = createStackNavigator();
 
 import SCREENS from 'navigation/Screens';
 import { COLORS } from 'common/constants';
@@ -148,6 +150,16 @@ const AdminShopStackNavigator = () => (
   </AdminShopStack.Navigator>
 );
 
+const LoginShopStackNavigator = () => (
+  <LoginShopStack.Navigator initialRouteName={SCREENS.Login}>
+    <LoginShopStack.Screen
+      name={SCREENS.Login}
+      component={AuthScreen}
+      options={{ title: 'Authenticate' }}
+    />
+  </LoginShopStack.Navigator>
+);
+
 const Tab = createBottomTabNavigator();
 
 const renderIcon = (iconName) =>
@@ -155,24 +167,45 @@ const renderIcon = (iconName) =>
     return <IonIcons name={iconName} size={size} color={color} />;
   };
 
-const ShopTabNavigator = () => (
-  <Tab.Navigator>
-    <Tab.Screen
-      name={SCREENS.ShopProductsList}
-      component={ShopProductsNavigator}
-      options={{ title: 'Products', tabBarIcon: renderIcon('baseball') }}
-    />
-    <Tab.Screen
-      name={SCREENS.ShopOrders}
-      component={ShopOrdersStackNavigator}
-      options={{ title: 'Orders', tabBarIcon: renderIcon('briefcase') }}
-    />
-    <Tab.Screen
-      name={SCREENS.ShopUserProducts}
-      component={AdminShopStackNavigator}
-      options={{ title: 'Admin', tabBarIcon: renderIcon('settings') }}
-    />
-  </Tab.Navigator>
-);
+const ShopTabNavigator = () => {
+  const isUserLoggedIn = useSelector(
+    (state) => state.shop.userLoginState.data.localId,
+  );
+  return (
+    <Tab.Navigator>
+      {isUserLoggedIn ? (
+        [
+          <Tab.Screen
+            key={SCREENS.ShopProductsList}
+            name={SCREENS.ShopProductsList}
+            component={ShopProductsNavigator}
+            options={{ title: 'Products', tabBarIcon: renderIcon('baseball') }}
+          />,
+          <Tab.Screen
+            key={SCREENS.ShopOrders}
+            name={SCREENS.ShopOrders}
+            component={ShopOrdersStackNavigator}
+            options={{ title: 'Orders', tabBarIcon: renderIcon('briefcase') }}
+          />,
+          <Tab.Screen
+            key={SCREENS.ShopUserProducts}
+            name={SCREENS.ShopUserProducts}
+            component={AdminShopStackNavigator}
+            options={{ title: 'Admin', tabBarIcon: renderIcon('settings') }}
+          />,
+        ]
+      ) : (
+        <Tab.Screen
+          name={SCREENS.Login}
+          component={LoginShopStackNavigator}
+          options={{
+            title: 'Authenticate',
+            tabBarIcon: renderIcon('log-in'),
+          }}
+        />
+      )}
+    </Tab.Navigator>
+  );
+};
 
 export default ShopTabNavigator;

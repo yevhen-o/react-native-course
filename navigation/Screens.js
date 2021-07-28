@@ -18,6 +18,7 @@ const SCREENS = {
   FavoriteStack: 'FavoriteStack',
 
   Shop: 'Shop',
+  Login: 'Login',
   ShopCart: 'ShopCart',
   ShopOrders: 'ShopOrders',
   ShopProduct: 'ShopProduct',

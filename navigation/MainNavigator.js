@@ -1,9 +1,15 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { TouchableOpacity } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
-import { createDrawerNavigator } from '@react-navigation/drawer';
+import {
+  DrawerItem,
+  DrawerItemList,
+  createDrawerNavigator,
+  DrawerContentScrollView,
+} from '@react-navigation/drawer';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import SCREENS from 'navigation/Screens';
@@ -18,10 +24,9 @@ import MealDetail from 'screens/meals/MealDetail';
 import Headings from 'screens/Components/TextComponents';
 import Buttons from 'screens/Components/Buttons';
 import FormElements from 'screens/Components/FormElements';
-
 import ShopTabNavigator from './ShopNavigator';
-
 import IonIcons from 'components/IonIcons';
+import { logOutUser } from 'redux/actions/shopActions';
 
 const MealsStack = createStackNavigator();
 const FilterMealsStack = createStackNavigator();
@@ -217,9 +222,23 @@ const ComponentsAppTabNavigator = () => (
 const Drawer = createDrawerNavigator();
 
 const MainNavigator = () => {
+  const dispatch = useDispatch();
   return (
     <NavigationContainer>
-      <Drawer.Navigator initialRouteName={SCREENS.Shop}>
+      <Drawer.Navigator
+        initialRouteName={SCREENS.Shop}
+        drawerContent={(props) => {
+          return (
+            <DrawerContentScrollView {...props}>
+              <DrawerItemList {...props} />
+              <DrawerItem
+                label="Logout"
+                icon={renderIcon('log-out')}
+                onPress={() => dispatch(logOutUser())}
+              />
+            </DrawerContentScrollView>
+          );
+        }}>
         <Drawer.Screen
           name={SCREENS.Goals}
           component={GoalsStackNavigator}

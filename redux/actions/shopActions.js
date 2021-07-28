@@ -1,8 +1,10 @@
 import { AT } from 'redux/ActionsTypes';
 import {
+  userLoginFn,
   actionFactory,
   getProductsFn,
   getUserOrdersFn,
+  userRenewTokenFn,
   userPlaceOrderFn,
   getUserProductsFn,
   userRemoveProductFn,
@@ -52,6 +54,18 @@ export const shopAddEditProduct = (section, data, payload) => ({
   payload: { id: data.name, ...payload },
 });
 
+export const setUserInfo = (section, data, ...payload) => {
+  return {
+    type: AT.SHOP_SET_USER_INFO,
+    payload: { ...data, ...payload },
+    section,
+  };
+};
+
+export const logOutUser = () => ({
+  type: AT.SHOP_USER_LOGOUT,
+});
+
 export const getProducts = actionFactory(
   getProductsFn,
   setSectionFetching,
@@ -98,4 +112,20 @@ export const userAddEditProduct = actionFactory(
   [setSectionFetched, shopAddEditProduct],
   setSectionRejected,
   'userAddEditProductState',
+);
+
+export const userLogin = actionFactory(
+  userLoginFn,
+  setSectionFetching,
+  [setSectionFetched, setUserInfo],
+  setSectionRejected,
+  'userLoginState',
+);
+
+export const userRefreshToken = actionFactory(
+  userRenewTokenFn,
+  setSectionFetching,
+  [setSectionFetched, setUserInfo],
+  setSectionRejected,
+  'userLoginState',
 );
