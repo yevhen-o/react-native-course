@@ -12,7 +12,7 @@ const GoalsScreen = () => {
   const [switchValue, setSwitchValue] = useState(false);
 
   return (
-    <PageWrapper>
+    <PageWrapper style={{ paddingTop: 32 }}>
       <View>
         <TextInput
           label={'Field label'}
@@ -29,11 +29,13 @@ const GoalsScreen = () => {
         />
 
         <TextInput
-          hasError
+          isTouched
+          rules={{ title: { isRequired: true, minLength: 50, maxLength: 100 } }}
+          formErrors={{ title: 'Some text to describe error' }}
+          fieldKey="title"
           value={goalTitle}
           onChange={setGoalTitle}
           label={'Field with error'}
-          errorText="Some text to describe error"
         />
 
         <CopyButton

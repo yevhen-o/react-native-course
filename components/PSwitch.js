@@ -10,6 +10,7 @@ const PSwitch = ({
   value,
   hasError,
   label,
+  style,
   helpText,
   errorText,
   ...restProps
@@ -31,7 +32,7 @@ const PSwitch = ({
   });
 
   return (
-    <View style={styles.container}>
+    <View style={{ ...style, ...styles.container }}>
       <View style={styles.switch}>
         {label && <FieldLabel hasError={hasError}>{label}</FieldLabel>}
         <Switch

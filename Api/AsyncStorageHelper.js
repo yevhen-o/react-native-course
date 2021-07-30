@@ -6,7 +6,7 @@ let storage = {};
 async function getStorage() {
   try {
     const storageString = await AsyncStorage.getItem(ROOT_STORAGE_KEY);
-    storage = JSON.parse(storageString);
+    storage = JSON.parse(storageString) || {};
   } catch (e) {
     storage = {};
   }

@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     paddingBottom: SPACES.regular,
     paddingLeft: SPACES.regular,
     paddingRight: SPACES.regular,
-    paddingTop: SPACES.large,
+    paddingTop: SPACES.regular,
   },
   wrapper: {
     flex: 1,

@@ -14,7 +14,7 @@ import ProgressIndicator from 'components/ProgressIndicator';
 import { storageGet, storageKeys } from 'Api/AsyncStorageHelper';
 import { setSectionFetched } from 'redux/actions/shopActions';
 
-const Login = () => {
+const AuthScreen = () => {
   const { isFetching } = useSelector((state) => state.shop.userLoginState);
   const [values, setValues] = useState({
     login: 'yevhenne@gmail.com',
@@ -129,4 +129,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Login;
+export default AuthScreen;
