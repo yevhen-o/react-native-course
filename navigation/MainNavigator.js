@@ -234,7 +234,10 @@ const MainNavigator = () => {
               <DrawerItem
                 label="Logout"
                 icon={renderIcon('log-out')}
-                onPress={() => dispatch(logOutUser())}
+                onPress={() => {
+                  dispatch(logOutUser());
+                  props.navigation.toggleDrawer();
+                }}
               />
             </DrawerContentScrollView>
           );

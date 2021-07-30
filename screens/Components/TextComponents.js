@@ -10,7 +10,7 @@ import ErrorText from 'components/ErrorText';
 
 const TextComponents = () => {
   return (
-    <PageWrapper>
+    <PageWrapper style={{ paddingTop: 24 }}>
       <View>
         <PText isH1>App headings and texts</PText>
         <Card isWhite>

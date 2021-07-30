@@ -14,22 +14,3 @@ export const SPACES = {
   large: 24,
   xLarge: 32,
 };
-
-export const HEADINGS = {
-  h1: {
-    ontWeight: 'bold',
-    borderBottomWidth: 2,
-    borderColor: COLORS.accent,
-    marginBottom: 8,
-    paddingBottom: 4,
-    color: COLORS.primary,
-  },
-  h2: {
-    ontWeight: 'bold',
-    borderBottomWidth: 1,
-    borderColor: COLORS.accent,
-    marginBottom: 6,
-    paddingBottom: 4,
-    color: COLORS.primary,
-  },
-};

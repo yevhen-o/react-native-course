@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { showToast } from 'redux/actions/appActions';
 import { getUserId } from './helper';
 
 export const httpClient = axios.create({
@@ -30,44 +29,6 @@ export const STATUS = {
   INTERNAL_ERROR: 500,
   MAINTENANCE: 503,
   BED_REQUEST: 400,
-};
-
-export const fetchingFactory = async (fetchingFunction, options) => {
-  const {
-    dispatch,
-    errorMessage,
-    successMessage,
-    deriveMessageFromResponse,
-    deriveErrorFromResponse,
-    additionalDataRequest,
-  } = options;
-  try {
-    const res = await fetchingFunction();
-
-    if (res.data && res.data.acl_error) {
-      return Promise.reject(res);
-    }
-    if (res.data && res.data.type === STATUS.FORBIDDEN && res.data.acl_error) {
-      return Promise.reject(res);
-    }
-
-    if (deriveMessageFromResponse && deriveMessageFromResponse(res)) {
-      dispatch(showToast(deriveMessageFromResponse(res)));
-    } else if (successMessage) {
-      dispatch(showToast(successMessage));
-    }
-    return res;
-  } catch (err) {
-    if (!additionalDataRequest) {
-      if (deriveErrorFromResponse) {
-        deriveErrorFromResponse(err) !== '' &&
-          dispatch(showToast(deriveErrorFromResponse(err)));
-      } else {
-        const message = errorMessage;
-        !!message && dispatch(showToast(message));
-      }
-    }
-  }
 };
 
 export const actionFactory =

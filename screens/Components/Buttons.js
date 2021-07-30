@@ -9,7 +9,7 @@ import PageWrapper from 'components/PageWrapper';
 
 const Buttons = () => {
   return (
-    <PageWrapper>
+    <PageWrapper style={{ paddingTop: 24 }}>
       <View>
         <PText isH1>App Buttons</PText>
         <Card isWhite>

@@ -7,7 +7,9 @@ import { SPACES } from 'common/constants';
 const PageWrapper = (props) => {
   const Cmp = props.isWithoutScrollView ? View : ScrollView;
   return (
-    <Cmp style={styles.wrapper}>
+    <Cmp
+      style={{ ...styles.wrapper, ...props.style }}
+      keyboardShouldPersistTaps="always">
       <View style={styles.container}>{props.children}</View>
     </Cmp>
   );
