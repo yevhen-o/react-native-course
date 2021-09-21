@@ -25,6 +25,11 @@ const SCREENS = {
   ShopEditProduct: 'ShopEditProduct',
   ShopProductsList: 'ShopProductsList',
   ShopUserProducts: 'ShopUserProducts',
+
+  GratePlace: 'GratePlace',
+  AddEditPlace: 'AddEditPlace',
+  PlaceMap: 'PlaceMap',
+  PlaceDetail: 'PlaceDetail',
 };
 
 export default SCREENS;

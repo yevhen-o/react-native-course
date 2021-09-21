@@ -25,6 +25,7 @@ import Headings from 'screens/Components/TextComponents';
 import Buttons from 'screens/Components/Buttons';
 import FormElements from 'screens/Components/FormElements';
 import ShopTabNavigator from './ShopNavigator';
+import GratePlaceTabNavigator from './GratePlaceTabNavigator';
 import IonIcons from 'components/IonIcons';
 import { logOutUser } from 'redux/actions/shopActions';
 
@@ -226,7 +227,7 @@ const MainNavigator = () => {
   return (
     <NavigationContainer>
       <Drawer.Navigator
-        initialRouteName={SCREENS.Shop}
+        initialRouteName={SCREENS.GratePlace}
         drawerContent={(props) => {
           return (
             <DrawerContentScrollView {...props}>
@@ -266,6 +267,11 @@ const MainNavigator = () => {
           name={SCREENS.Shop}
           component={ShopTabNavigator}
           options={{ title: 'The Shop App' }}
+        />
+        <Drawer.Screen
+          name={SCREENS.GratePlace}
+          component={GratePlaceTabNavigator}
+          options={{ title: 'The Grate Place App' }}
         />
       </Drawer.Navigator>
     </NavigationContainer>

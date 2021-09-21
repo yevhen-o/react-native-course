@@ -4,13 +4,22 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="46c470ec-41e8-433e-9e85-2f78da2446d7" name="Default Changelist" comment="" />
+    <list default="true" id="46c470ec-41e8-433e-9e85-2f78da2446d7" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Api/Api.js" beforeDir="false" afterPath="$PROJECT_DIR$/Api/Api.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/navigation/MainNavigator.js" beforeDir="false" afterPath="$PROJECT_DIR$/navigation/MainNavigator.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/navigation/Screens.js" beforeDir="false" afterPath="$PROJECT_DIR$/navigation/Screens.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/redux/ActionsTypes.js" beforeDir="false" afterPath="$PROJECT_DIR$/redux/ActionsTypes.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[VirtualDevicePath@/home/yevhen/.android/avd/Pixel_3a_API_30_x86.avd]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[VirtualDevicePath@/home/yevhen/.android/avd/Pixel_API_28.avd]" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -97,11 +106,12 @@
       <screen x="56" y="27" width="2504" height="1413" />
     </state>
     <state x="766" y="391" width="1084" height="710" key="#com.intellij.execution.impl.EditConfigurationsDialog/56.27.2504.1413@56.27.2504.1413" timestamp="1627550193326" />
-    <state x="56" y="27" width="1864" height="520" key="AVDManager" timestamp="1627633758453">
-      <screen x="56" y="27" width="1864" height="1053" />
+    <state x="56" y="27" width="2504" height="698" key="AVDManager" timestamp="1630231887635">
+      <screen x="56" y="27" width="2504" height="1413" />
     </state>
     <state x="56" y="27" width="1864" height="520" key="AVDManager/56.27.1864.1053@56.27.1864.1053" timestamp="1627633758453" />
     <state x="56" y="27" width="1864" height="1053" key="AVDManager/56.27.1864.2133@56.27.1864.2133" timestamp="1627632616554" />
+    <state x="56" y="27" width="2504" height="698" key="AVDManager/56.27.2504.1413@56.27.2504.1413" timestamp="1630231887635" />
     <state x="172" y="127" width="1648" height="853" key="AVDManager/72.27.1848.1053/0.1080.1920.1080@72.27.1848.1053" timestamp="1625129775588" />
     <state x="779" y="311" width="424" height="491" key="FileChooserDialogImpl" timestamp="1625147989182">
       <screen x="72" y="27" width="1848" height="1053" />

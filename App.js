@@ -6,21 +6,23 @@ import AppLoading from 'expo-app-loading';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { LogBox } from 'react-native';
-LogBox.ignoreLogs(['Reanimated 2']);
+LogBox && LogBox.ignoreLogs && LogBox.ignoreLogs(['Reanimated 2']);
 
 import MainNavigator from 'navigation/MainNavigator';
-import { mealsReducer } from 'redux/reducers/mealsReducer';
 import { appReducer } from 'redux/reducers/appReducer';
 import { shopReducer } from 'redux/reducers/shopReducer';
+import { mealsReducer } from 'redux/reducers/mealsReducer';
+import { placesReducer } from 'redux/reducers/placesReducer';
 
 import Interceptor from 'Api/interceptors';
 import { getUserId } from 'Api/helper';
 
 const store = createStore(
   combineReducers({
-    meals: mealsReducer,
     app: appReducer,
     shop: shopReducer,
+    meals: mealsReducer,
+    places: placesReducer,
   }),
   composeWithDevTools(applyMiddleware(ReduxThunk)),
 );

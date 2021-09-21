@@ -122,3 +122,19 @@ export const userRenewTokenFn = ({ refreshToken }) =>
     expires_in: response.data.expires_in,
     refreshToken: response.data.refresh_token,
   }));
+
+export const getPlacesFn = () =>
+  httpClient
+    .get('places.json')
+    .then(retrieveData)
+    .then(moveObjectKeyIntoIdField);
+
+export const userRemovePlaceFn = ({ placeId }) =>
+  httpClient.delete(`/places/${placeId}.json`);
+
+export const userAddEditPlaceFn = (place) => {
+  if (!place.id) {
+    return httpClient.post('/places.json', place).then(retrieveData);
+  }
+  return httpClient.patch(`/places/${place.id}.json`, place);
+};
